@@ -12,7 +12,7 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'users',
+          model: 'Users',
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -22,7 +22,7 @@ module.exports = {
       sellerId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'users',
+          model: 'Users',
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -34,9 +34,9 @@ module.exports = {
         field: 'total_price',
         allowNull: false,
       },
-      deliveryAdress: {
+      deliveryAddress: {
         type: Sequelize.STRING,
-        field: 'delivery_adress',
+        field: 'delivery_address',
         allowNull: false,
       },
       deliveryNumber: {
@@ -48,11 +48,12 @@ module.exports = {
         type: Sequelize.DATE,
         field: 'sale_date',
         allowNull: false,
-        default: Sequelize.NOW,
+        defaultValue: Sequelize.NOW,
       },
       status: {
         type: Sequelize.STRING,
         allowNull: false,
+        defaultValue: 'Pendente',
       },
     });
   },

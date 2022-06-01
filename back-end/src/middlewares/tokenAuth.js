@@ -1,8 +1,8 @@
-import * as jwt from 'jsonwebtoken';
-import * as fs from 'fs';
-import { User } from '../database/models';
+const fs = require('fs');
+const jwt = require('jsonwebtoken');
+const { User } = require('../database/models'); 
 
-const JWT_SECRET = fs.readFileSync();
+const JWT_SECRET = fs.readFileSync('jwt.evaluation.key', 'utf8');
 const errorMessage = { message: 'Token not found' };
 
 const createToken = (userData) => { 
