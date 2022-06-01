@@ -37,25 +37,16 @@ const authorizationGeneral = async (req, res, next) => {
   }
 };
 
-const authorizationAdmin = async (req, res, next) => {
+const checkAdmin = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
 
-    if (!authorization) { 
-      return res.status(404).json({ message: 'Token not found' });
-    }
-    
-    const {email, role} = verifyUser(authorization);
+    const {role} = verifyUser(authorization);
     
     if (role !== 'admin') { 
       return res.status(401).json({ message: 'Unauthorized user' });
     }
-    const user = await User.findOne({ where: { email } });
-
-    if (!email || !user) {
-      return res.status(401).json({ message: 'Expired or invalid token' });
-    } 
-
+    
     next();
   } catch (err) {
     return res.status(401).json({ message: 'Expired or invalid token' });
@@ -67,5 +58,5 @@ module.exports = {
   verifyUser,
   createToken,
   authorizationGeneral,
-  authorizationAdmin,
+  checkAdmin,
 };
