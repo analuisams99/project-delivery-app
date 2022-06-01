@@ -33,14 +33,10 @@ const listAllSales = async () => {
 };
 
 const listOneSale = async (id) => {
-  const sale = await Sale.find({ where: { id },
-    include: [{
-      model: User,
-      as: 'users',
-    }, {
-      model: Product,
-      as: 'products',
-    }],
+  console.log('service', id);
+  const sale = await Sale.findAll({
+    where: { id },
+    include: [{ model: User, as: 'users', through: { attributes: [] } }],
   });
 
   if (!sale) return null;

@@ -55,7 +55,7 @@ const getAllSales = async (req, res, _next) => {
 
 const getSale = async (req, res, _next) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     const sale = await listOneSale(id);
     return res.status(200).json(sale);
   } catch (error) {
