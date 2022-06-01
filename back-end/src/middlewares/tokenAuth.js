@@ -1,14 +1,15 @@
-import * as jwt from "jsonwebtoken";
-import * as fs from "fs";
+import * as jwt from 'jsonwebtoken';
+import * as fs from 'fs';
 
-const JWT_SECRET = fs.readFileSync()
+const JWT_SECRET = fs.readFileSync();
+const errorMessage = { message: 'Token not found' };
 
 const createToken = (userData) => { 
-  const jwtConfig = { algorithm: 'HS256', expiresIn: '1d'};
-  const token = jwt.sign(userData, JWT_SECRET ,jwtConfig)
+  const jwtConfig = { algorithm: 'HS256', expiresIn: '1d' };
+  const token = jwt.sign(userData, JWT_SECRET, jwtConfig);
 
   return token;
-}
+};
 
 const verifyUser = (authorization) => {
   const userData = jwt.verify(authorization, JWT_SECRET);
@@ -20,7 +21,7 @@ const authorizationGeneral = async (req, res, next) => {
     const { authorization } = req.headers;
 
     if (!authorization) { 
-      return res.status(404).json({ message: 'Token not found' });
+      return res.status(404).json(errorMessage);
     }
 
     const { email } = verifyUser(authorization);
@@ -28,12 +29,12 @@ const authorizationGeneral = async (req, res, next) => {
     const user = await User.findOne({ where: { email } });
 
     if (!email || !user) {
-      return res.status(401).json({ message: 'Expired or invalid token' });
+      return res.status(401).json(errorMessage);
     }
 
     next();
   } catch (err) {
-    return res.status(401).json({ message: 'Expired or invalid token' });
+    return res.status(401).json(errorMessage);
   }
 };
 
@@ -41,7 +42,7 @@ const checkAdmin = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
 
-    const {role} = verifyUser(authorization);
+    const { role } = verifyUser(authorization);
     
     if (role !== 'admin') { 
       return res.status(401).json({ message: 'Unauthorized user' });
@@ -49,10 +50,9 @@ const checkAdmin = async (req, res, next) => {
     
     next();
   } catch (err) {
-    return res.status(401).json({ message: 'Expired or invalid token' });
+    return res.status(401).json(errorMessage);
   }
 };
-
 
 module.exports = { 
   verifyUser,
