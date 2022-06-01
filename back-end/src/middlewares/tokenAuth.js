@@ -1,5 +1,6 @@
 import * as jwt from 'jsonwebtoken';
 import * as fs from 'fs';
+import { User } from '../database/models';
 
 const JWT_SECRET = fs.readFileSync();
 const errorMessage = { message: 'Token not found' };
