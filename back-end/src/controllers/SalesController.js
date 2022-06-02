@@ -17,6 +17,7 @@ const createSale = async (req, res, _next) => {
 const statusUpdateDelivered = async (req, res, _next) => {
   try {
     const { id } = req.params;
+    console.log('controller', id);
     await statusChangeDelivered(id);
     return res.status(200).json({ message: SUCCESSFULLY_MESSAGE });
   } catch (error) {
@@ -65,8 +66,8 @@ const getSale = async (req, res, _next) => {
 
 const getCostumerSales = async (req, res, _next) => {
   try {
-    const { userId } = req.body;
-    const costumerSales = await listCostumerSales(userId);
+    const { id } = req.params;
+    const costumerSales = await listCostumerSales(id);
     return res.status(200).json(costumerSales);
   } catch (error) {
     res.status(400).json({ error });
@@ -75,8 +76,8 @@ const getCostumerSales = async (req, res, _next) => {
 
 const getSellerSales = async (req, res, _next) => {
   try {
-    const { sellerId } = req.body;
-    const sellerSales = await listSellerSales(sellerId);
+    const { id } = req.params;
+    const sellerSales = await listSellerSales(id);
     return res.status(200).json(sellerSales);
   } catch (error) {
     res.status(400).json({ error });

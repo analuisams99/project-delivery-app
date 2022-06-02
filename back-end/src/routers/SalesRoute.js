@@ -10,11 +10,10 @@ const {
 const salesRoute = express.Router();
 
 salesRoute.get('/', getAllSales);
+salesRoute.post('/', createSale);
 salesRoute.get('/:id', getSale);
 salesRoute.get('/costumer/:id', getCostumerSales);
 salesRoute.get('/seller/:id', getSellerSales);
-
-salesRoute.post('/', createSale);
 
 salesRoute.patch('/delivered/:id', statusUpdateDelivered);
 salesRoute.patch('/prepare/:id', statusUpdatePrepare);

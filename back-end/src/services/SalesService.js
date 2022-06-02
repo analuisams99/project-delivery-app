@@ -13,15 +13,15 @@ const createSales = async (saleData) => {
 };
 
 const statusChangeDelivered = async (id) => {
-  await Sale.update({ where: { id } }, { status: 'Entregue' });
+  await Sale.update({ status: 'Entregue' }, { where: { id } });
 };
 
 const statusChangePrepare = async (id) => {
-  await Sale.update({ where: { id } }, { status: 'Preparando' });
+  await Sale.update({ status: 'Preparando' }, { where: { id } });
 };
 
 const statusChangeToDeliver = async (id) => {
-  await Sale.update({ where: { id } }, { status: 'Em Trânsito' });
+  await Sale.update({ status: 'Em trânsito' }, { where: { id } });
 };
 
 const listAllSales = async () => {
@@ -34,9 +34,13 @@ const listAllSales = async () => {
 
 const listOneSale = async (id) => {
   console.log('service', id);
-  const sale = await Sale.findAll({
+  const sale = await Sale.findOne({
     where: { id },
-    include: [{ model: User, as: 'users', through: { attributes: [] } }],
+    include: [
+      { model: User, as: 'User', attributes: { exclude: ['id', 'email', 'password', 'role'] } },
+      { model: User, as: 'Seller', attributes: { exclude: ['id', 'email', 'password', 'role'] } },
+      { model: Product, as: 'Products', through: { attributes: ['quantity'] } },
+    ],
   });
 
   if (!sale) return null;
