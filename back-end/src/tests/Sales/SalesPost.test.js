@@ -8,42 +8,35 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-const { Sale, SaleProduct } = require('../../database/models');
+const { Sale, SaleProduct, User } = require('../../database/models');
 
-const mockSale = {
-  userId: 1,
-  sellerId: 3,
-  totalPrice: 12.00,
-  deliveryAddress:  "Rua dos Bobos, 2",
-  deliveryNumber: "987654321",
-  products: [{productId: 7, quantity: 3}, {productId: 3, quantity: 1}]
-};
+const {mockSale, mockSaleResponse, mockSaleWrong} = require('../mocks/SalesPostMocks');
+const userData = require('../mocks/mockUserDb');
+const {createToken} = require('../../middlewares/tokenAuth');
 
-describe('se a requisição do POST /sales funciona da maneira esperada', () => {
+describe('Testa rota POST /sales', () => {
   let chaiHttpResponse;
 
   before(() => {
     sinon.stub(Sale, 'create')
-      .resolves({
-        id: 1,
-        userId: 1,
-        sellerId: 1,
-        totalPrice: 3.30,
-        deliveryAddress:  'Rua dos Bobos, 0',
-        deliveryNumber: '123456789',
-        status: 'Pendente',
-        saleDate: '2020-05-31T19:14:41.000Z',
-      });
-      sinon.stub(SaleProduct, 'create').resolves({});
+    sinon.stub(User, 'findOne').resolves(userData[0]);
+    sinon.stub(SaleProduct, 'create').resolves({});
   });
 
   after(() => {
     Sale.create.restore();
+    User.findOne.restore();
     SaleProduct.create.restore();
   });
 
   it('se o endpoint retorna o objeto esperado dada uma requisição correta', async () => {
-    chaiHttpResponse = await chai.request(server).post('/sales').send(mockSale);
+    (Sale.create).resolves(mockSaleResponse);
+
+    const token = createToken(userData[0]);
+    
+    chaiHttpResponse = await chai.request(server).post('/sales').send(mockSale)
+      .set({'authorization': token, schema: 'salesSchema'});
+
     const { body } = chaiHttpResponse;
   
     expect(chaiHttpResponse).to.have.status(201);
@@ -62,10 +55,50 @@ describe('se a requisição do POST /sales funciona da maneira esperada', () => 
     expect(body.status).to.be.equal('Pendente');
   });
 
-  // it('se o endpoint retorna uma mensagem de erro quando a requisição é feita de maneira incorreta', async () => {
-  //   chaiHttpResponse = await chai.request(server).get('/tasksa');
-  //   expect(chaiHttpResponse).to.have.status(404);
-  // });
+  it('se o endpoint retorna uma mensagem de erro quando a requisição é feita sem um dos campos obrigatórios do body (userId)', async () => {
+    const token = createToken(userData[0]);
+    chaiHttpResponse = await chai.request(server).post('/sales').send(mockSaleWrong)
+      .set({'authorization': token, schema: 'salesSchema'});
+
+    expect(chaiHttpResponse).to.have.status(400);
+
+    const { body } = chaiHttpResponse;
+    expect(chaiHttpResponse).to.have.status(400);
+    expect(body.message).to.be.equal('"userId" is a required field');
+  });
+
+  it('se o endpoint retorna uma mensagem de erro quando a requisição é feita sem o header schema', async () => {
+    const token = createToken(userData[0]);
+    chaiHttpResponse = await chai.request(server).post('/sales').send(mockSaleWrong)
+      .set({'authorization': token });
+
+      const { body } = chaiHttpResponse;
+
+    expect(chaiHttpResponse).to.have.status(400);
+    expect(body.message).to.be.equal('Header must be valid');
+  });
+
+  it('se o endpoint retorna uma mensagem de erro quando a requisição é feita sem um token válido', async () => {
+    chaiHttpResponse = await chai.request(server).post('/sales').send(mockSaleWrong)
+      .set({'authorization': 'token', schema: 'salesSchema'});
+
+      
+    const { body } = chaiHttpResponse;
+      
+    expect(chaiHttpResponse).to.have.status(401);
+    expect(body.message).to.be.equal('Token invalid');
+  });
+
+  it('se o endpoint retorna uma mensagem de erro quando a requisição é feita sem um token ', async () => {
+    chaiHttpResponse = await chai.request(server).post('/sales').send(mockSaleWrong)
+      .set({ schema: 'salesSchema'});
+
+      
+    const { body } = chaiHttpResponse;
+      
+    expect(chaiHttpResponse).to.have.status(404);
+    expect(body.message).to.be.equal('Token not found');
+  });
 
 });
 

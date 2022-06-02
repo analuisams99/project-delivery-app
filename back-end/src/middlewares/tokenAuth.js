@@ -7,10 +7,8 @@ const JWT_SECRET = fs.readFileSync('jwt.evaluation.key', 'utf-8');
 const noToken = { message: 'Token not found' };
 const invalidToken = { message: 'Token invalid' };
 
-const errorMessage = { message: 'Token not found' };
-
 const createToken = (userData) => { 
-  const jwtConfig = { algorithm: 'HS256', expiresIn: '1d' };
+  const jwtConfig = { algorithm: 'HS256' };
   const token = jwt.sign(userData, JWT_SECRET, jwtConfig);
 
   return token;

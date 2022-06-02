@@ -6,7 +6,7 @@ const chaiHttp = require('chai-http');
 const server = require('../../api/app');
 const { Product, User } = require('../../database/models');
 const { createToken } = require('../../middlewares/tokenAuth');
-const userData = require('../mockUserDb');
+const userData = require('../mocks/mockUserDb');
 
 chai.use(chaiHttp);
 
