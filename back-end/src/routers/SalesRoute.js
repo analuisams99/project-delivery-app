@@ -6,14 +6,15 @@ const {
   getCostumerSales, getSellerSales, getSale,
   statusUpdateDelivered, statusUpdatePrepare, statusUpdateToDeliver,
 } = require('../controllers/SalesController');
+const { authorizationGeneral } = require('../middlewares/tokenAuth');
 
 const salesRoute = express.Router();
 
-salesRoute.get('/', getAllSales);
+salesRoute.get('/', authorizationGeneral, getAllSales);
 salesRoute.post('/', createSale);
-salesRoute.get('/:id', getSale);
-salesRoute.get('/costumer/:id', getCostumerSales);
-salesRoute.get('/seller/:id', getSellerSales);
+salesRoute.get('/:id', authorizationGeneral, getSale);
+salesRoute.get('/costumer/:id', authorizationGeneral, getCostumerSales);
+salesRoute.get('/seller/:id', authorizationGeneral, getSellerSales);
 
 salesRoute.patch('/delivered/:id', statusUpdateDelivered);
 salesRoute.patch('/prepare/:id', statusUpdatePrepare);
