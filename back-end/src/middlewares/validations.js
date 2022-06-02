@@ -5,7 +5,7 @@ const errorMessages = {
   'string.empty': '400|{#label} is not allowed to be empty',
   'string.email': '400|{#label} must be a valid email',
   'string.min': '400|{#label} length is not correct',
-  'string.valid': '400|{#label} must be valid',
+  'any.only': '400|{#label} must be valid',
   'number.empty': '400|{#label} is not allowed to be empty',
 
 };
@@ -57,7 +57,6 @@ module.exports = async (req, res, next) => {
     } 
     
     const { error } = schemas[schema].validate({ ...body });
-    
     if (error) {
       const [status, message] = error.message.split('|');  
       return res.status(status).json({ message });
