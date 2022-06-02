@@ -9,16 +9,18 @@ module.exports = (sequelize, DataTypes) => {
     userId: {
       type: DataTypes.INTEGER,
       foreignKey: true,
+      field: 'user_id',
     },
     sellerId: {
       type: DataTypes.INTEGER,
       foreignKey: true,
+      field: 'seller_id',
     },
-    totalPrice: DataTypes.DECIMAL,
-    deliveryAdress: DataTypes.STRING,
-    deliveryNumber: DataTypes.STRING,
-    saleDate: DataTypes.DATE,
-    status: DataTypes.STRING,
+    totalPrice: {type: DataTypes.DECIMAL, allowNull: false},
+    deliveryAddress: {type: DataTypes.STRING, allowNull: false},
+    deliveryNumber: {type: DataTypes.STRING, allowNull: false},
+    saleDate: {type: DataTypes.DATE, defaultValue: DataTypes.NOW, },
+    status: {type: DataTypes.STRING, defaultValue: 'Pendente'},
   },
   {
     timestamps: false,
