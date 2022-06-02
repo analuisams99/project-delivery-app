@@ -15,6 +15,11 @@ const getSellers = async () => {
    return users;
 };
 
+const deleteUser = async (id) => { 
+   const users = await User.destroy({ where: { id } });
+   return users;
+};
+
 const getUserByEmail = async (email) => { 
    const user = await User.findOne({ where: { email } });   
    return user;
@@ -39,6 +44,16 @@ const createUser = async (userName, userEmail, userPassword) => {
    await User.create({ name: userName, email: userEmail, password, role });
    return { token: createToken({ name: userName, email: userEmail, role }) };
 };
+const createUserAdmin = async (userName, userEmail, userPassword, role) => { 
+   const user = await getUserByEmail(userEmail);
+   
+   if (user) { 
+      return { error: 'User already exist!' };
+   }
+   const password = md5(userPassword);
+   const { id } = await User.create({ name: userName, email: userEmail, password, role });
+   return { id };
+};
 
 module.exports = {
   login,
@@ -46,4 +61,6 @@ module.exports = {
   getUsers,
   createUser,
   getSellers,
+  deleteUser,
+  createUserAdmin,
 };
