@@ -2,15 +2,13 @@ const chai = require('chai');
 const sinon = require('sinon');
 const chaiHttp = require('chai-http');
 
-
 const server = require('./../../api/app');
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
-const { Sale, SaleProduct } = require('../database/models');
-
+const { Sale, SaleProduct } = require('../../database/models');
 
 const mockSale = {
   userId: 1,
@@ -26,30 +24,27 @@ describe('se a requisição do POST /sales funciona da maneira esperada', () => 
 
   before(() => {
     sinon.stub(Sale, 'create')
-        .resolves({
-          id: 1,
-          userId: 1,
-          sellerId: 1,
-          totalPrice: 3.30,
-          deliveryAddress:  'Rua dos Bobos, 0',
-          deliveryNumber: '123456789',
-          status: 'Pendente',
-          saleDate: '2020-05-31T19:14:41.000Z',
-        });
-        sinon.stub(SaleProduct, 'create')
-        .resolves({});
-});
+      .resolves({
+        id: 1,
+        userId: 1,
+        sellerId: 1,
+        totalPrice: 3.30,
+        deliveryAddress:  'Rua dos Bobos, 0',
+        deliveryNumber: '123456789',
+        status: 'Pendente',
+        saleDate: '2020-05-31T19:14:41.000Z',
+      });
+      sinon.stub(SaleProduct, 'create').resolves({});
+  });
 
-after(() => {
+  after(() => {
     Sale.create.restore();
     SaleProduct.create.restore();
-});
+  });
 
   it('se o endpoint retorna o objeto esperado dada uma requisição correta', async () => {
     chaiHttpResponse = await chai.request(server).post('/sales').send(mockSale);
     const { body } = chaiHttpResponse;
-    console.log(body);
-
   
     expect(chaiHttpResponse).to.have.status(201);
     expect(body).to.have.property('id');

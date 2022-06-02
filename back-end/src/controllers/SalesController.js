@@ -17,7 +17,6 @@ const createSale = async (req, res, _next) => {
 const statusUpdateDelivered = async (req, res, _next) => {
   try {
     const { id } = req.params;
-    console.log('controller', id);
     await statusChangeDelivered(id);
     return res.status(200).json({ message: SUCCESSFULLY_MESSAGE });
   } catch (error) {
