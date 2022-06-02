@@ -2,11 +2,10 @@ const express = require('express');
 
 const {
   createSale,
-  getAllSales, 
+  getAllSales,
   getCostumerSales, getSellerSales, getSale,
   statusUpdateDelivered, statusUpdatePrepare, statusUpdateToDeliver,
 } = require('../controllers/SalesController');
-const { authorizationGeneral } = require('../middlewares/tokenAuth');
 
 const { authorizationGeneral } = require('../middlewares/tokenAuth');
 const Validation = require('../middlewares/validations');
@@ -19,8 +18,8 @@ salesRoute.get('/:id', authorizationGeneral, getSale);
 salesRoute.get('/costumer/:id', authorizationGeneral, getCostumerSales);
 salesRoute.get('/seller/:id', authorizationGeneral, getSellerSales);
 
-salesRoute.patch('/delivered/:id', statusUpdateDelivered);
-salesRoute.patch('/prepare/:id', statusUpdatePrepare);
-salesRoute.patch('/todeliver/:id', statusUpdateToDeliver);
+salesRoute.patch('/delivered/:id', authorizationGeneral, statusUpdateDelivered);
+salesRoute.patch('/prepare/:id', authorizationGeneral, statusUpdatePrepare);
+salesRoute.patch('/todeliver/:id',authorizationGeneral, statusUpdateToDeliver);
 
 module.exports = salesRoute;
