@@ -1,10 +1,11 @@
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
-const User = require('../database/models');
+const { User } = require('../database/models');
 
 const JWT_SECRET = fs.readFileSync('jwt.evaluation.key', 'utf-8');
 
-const errorMessage = { message: 'Token not found' };
+const noToken = { message: 'Token not found' };
+const invalidToken = { message: 'Token invalid' };
 
 const createToken = (userData) => { 
   const jwtConfig = { algorithm: 'HS256', expiresIn: '1d' };
@@ -23,20 +24,18 @@ const authorizationGeneral = async (req, res, next) => {
     const { authorization } = req.headers;
 
     if (!authorization) { 
-      return res.status(404).json(errorMessage);
+      return res.status(404).json(noToken);
     }
-
     const { email } = verifyUser(authorization);
 
-    const user = await User.findOne({ where: { email } });
-
+    const user = await User.findOne({ where: { email } });   
     if (!email || !user) {
-      return res.status(401).json(errorMessage);
+      return res.status(401).json(invalidToken);
     }
 
     next();
   } catch (err) {
-    return res.status(401).json(errorMessage);
+    return res.status(401).json(invalidToken);
   }
 };
 
@@ -51,7 +50,7 @@ const checkAdmin = async (req, res, next) => {
     
     next();
   } catch (err) {
-    return res.status(401).json(errorMessage);
+    return res.status(401).json(invalidToken);
   }
 };
 
