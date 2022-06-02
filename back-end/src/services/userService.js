@@ -7,6 +7,14 @@ const getUsers = async () => {
    return users;
 };
 
+const getSellers = async () => { 
+   const users = await User.findAll({ attributes: { exclude: ['password'] },
+   where: { role: 'seller' },
+    });
+
+   return users;
+};
+
 const getUserByEmail = async (email) => { 
    const user = await User.findOne({ where: { email } });   
    return user;
@@ -37,4 +45,5 @@ module.exports = {
   getUserByEmail,
   getUsers,
   createUser,
+  getSellers,
 };

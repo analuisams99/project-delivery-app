@@ -1,9 +1,9 @@
-const LoginService = require('../services/userService');
+const UserService = require('../services/userService');
 
 const login = async (req, res) => { 
   try {
     const { email, password } = req.body; 
-    const response = await LoginService.login(email, password);
+    const response = await UserService.login(email, password);
     
     if ('error' in response) {
       return res.status(400).json(response);
@@ -17,7 +17,7 @@ const login = async (req, res) => {
 const createUser = async (req, res) => { 
   try {
     const { name, email, password } = req.body; 
-    const response = await LoginService.createUser(name, email, password);
+    const response = await UserService.createUser(name, email, password);
     
     if ('error' in response) {
       return res.status(400).json(response);
@@ -30,7 +30,20 @@ const createUser = async (req, res) => {
 
 const getUsers = async (req, res) => { 
   try {
-    const response = await LoginService.getUsers();
+    const response = await UserService.getUsers();
+    
+    if (!response) {
+      return res.status(400).json({ message: 'No users in data base' });
+    }
+    return res.status(201).json(response);   
+    } catch (err) {
+    res.status(500).json({ error: err.message });   
+  }
+};
+
+const getSellers = async (req, res) => { 
+  try {
+    const response = await UserService.getSellers();
     
     if (!response) {
       return res.status(400).json({ message: 'No users in data base' });
@@ -45,4 +58,5 @@ module.exports = {
   login,
   createUser,
   getUsers,
+  getSellers,
 }; 
