@@ -27,13 +27,12 @@ const statusChangeToDeliver = async (id) => {
 const listAllSales = async () => {
   const allSales = await Sale.findAll();
 
-  if (!allSales) return null;
+  if (!allSales) throw new Error('No sales found');
 
   return allSales;
 };
 
 const listOneSale = async (id) => {
-  console.log('service', id);
   const sale = await Sale.findOne({
     where: { id },
     include: [
@@ -43,7 +42,7 @@ const listOneSale = async (id) => {
     ],
   });
 
-  if (!sale) return null;
+  if (!sale) throw new Error('No sale found');
 
   return sale;
 };
@@ -51,7 +50,7 @@ const listOneSale = async (id) => {
 const listCostumerSales = async (id) => {
   const costumerSales = await Sale.findAll({ where: { userId: id } });
 
-  if (!costumerSales) return null;
+  if (!costumerSales) throw new Error('No costumer sales found');
 
   return costumerSales;
 };
@@ -59,7 +58,7 @@ const listCostumerSales = async (id) => {
 const listSellerSales = async (id) => {
   const sellerSales = await Sale.findAll({ where: { sellerId: id } });
 
-  if (!sellerSales) return null;
+  if (!sellerSales) throw new Error('No seller sales found');
 
   return sellerSales;
 };
