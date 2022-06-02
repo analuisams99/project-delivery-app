@@ -20,7 +20,7 @@ const adminSchema = Joi.object({
     name: Joi.string().empty().min(12).required(),
     email: Joi.string().empty().email().required(),
     password: Joi.string().empty().min(6).required(),
-    role: Joi.string().empty().valid('customer', 'seller', 'admin').required(),
+    role: Joi.string().empty().valid('customer', 'seller', 'administrator').required(),
   }).messages(errorMessages);
 
 const loginSchema = Joi.object({
@@ -55,10 +55,12 @@ module.exports = async (req, res, next) => {
     if (!Object.keys(schemas).includes(schema)) { 
       return res.status(400).json({ message: 'Header must be valid' });
     } 
-    const { error } = schemas[schema].validate(body);
-  if (error) {
-    const [status, message] = error.message.split('|');  
-    return res.status(status).json({ message });
-  }
+    
+    const { error } = schemas[schema].validate({ ...body });
+    
+    if (error) {
+      const [status, message] = error.message.split('|');  
+      return res.status(status).json({ message });
+    }
    next();
 };

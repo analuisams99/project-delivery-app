@@ -45,8 +45,7 @@ const checkAdmin = async (req, res, next) => {
     const { authorization } = req.headers;
 
     const { role } = verifyUser(authorization);
-    
-    if (role !== 'admin') { 
+    if (role !== 'administrator') { 
       return res.status(401).json({ message: 'Unauthorized user' });
     }
     
