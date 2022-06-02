@@ -7,10 +7,13 @@ const {
   statusUpdateDelivered, statusUpdatePrepare, statusUpdateToDeliver,
 } = require('../controllers/SalesController');
 
+const { authorizationGeneral } = require('../middlewares/tokenAuth');
+const Validation = require('../middlewares/validations');
+
 const salesRoute = express.Router();
 
 salesRoute.get('/', getAllSales);
-salesRoute.post('/', createSale);
+salesRoute.post('/', authorizationGeneral, Validation, createSale);
 salesRoute.get('/:id', getSale);
 salesRoute.get('/costumer/:id', getCostumerSales);
 salesRoute.get('/seller/:id', getSellerSales);
