@@ -26,9 +26,9 @@ const getUserByEmail = async (email) => {
 };
 
 const login = async (loginEmail, loginPassword) => { 
-   const { name, password, role } = await getUserByEmail(loginEmail);
+   const { id, name, password, role } = await getUserByEmail(loginEmail);
    if (password === md5(loginPassword)) { 
-      return { token: createToken({ name, email: loginEmail, role }) };
+      return { token: createToken({ id, name, email: loginEmail, role }) };
    }
    return { error: 'Invalid password' };
 };
@@ -41,8 +41,8 @@ const createUser = async (userName, userEmail, userPassword) => {
    }
    const password = md5(userPassword);
    const role = 'customer';
-   await User.create({ name: userName, email: userEmail, password, role });
-   return { token: createToken({ name: userName, email: userEmail, role }) };
+   const { id } = await User.create({ name: userName, email: userEmail, password, role });
+   return { token: createToken({ id, name: userName, email: userEmail, role }) };
 };
 const createUserAdmin = async (userName, userEmail, userPassword, role) => { 
    const user = await getUserByEmail(userEmail);
