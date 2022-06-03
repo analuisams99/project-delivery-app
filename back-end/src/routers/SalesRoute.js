@@ -20,6 +20,6 @@ salesRoute.get('/seller/:id', authorizationGeneral, getSellerSales); // id do us
 
 salesRoute.patch('/delivered/:id', authorizationGeneral, statusUpdateDelivered);
 salesRoute.patch('/prepare/:id', authorizationGeneral, statusUpdatePrepare);
-salesRoute.patch('/todeliver/:id',authorizationGeneral, statusUpdateToDeliver);
+salesRoute.patch('/todeliver/:id', authorizationGeneral, statusUpdateToDeliver);
 
 module.exports = salesRoute;
