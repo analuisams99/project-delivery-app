@@ -431,7 +431,7 @@ describe(requirement(1), () => {
     <strong>⚠️ Upload de arquivos</strong>
   </summary>
 
-  - Caso necessite realizar upload de algum arquivo/imagem, podem utilizar a ferramenta/tecnologia de sua preferência.
+  - Caso necessite realizar upload de algum arquivo/imagem, pode utilizar a ferramenta/tecnologia de sua preferência.
 Importante ressaltar que temos no course um conteúdo sobre o Multer e recomendamos a sua utilização, que inclusive já está instalado nas dependências, não deixe de dar uma olhada.
 
 </details>
