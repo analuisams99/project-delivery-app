@@ -10,11 +10,7 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-
-  const pushRegister = async (userData) => {
-    const response = await postRegister(userData);
-    return response;
-  };
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const handleChangeEmail = ({ target }) => {
     setEmail(target.value);
@@ -29,9 +25,10 @@ function Register() {
   };
 
   const handleRegisterClick = async () => {
-    const response = await pushRegister({ name, email, password });
+    const response = await postRegister({ name, email, password });
     if (!response.token) {
-      return console.log(response.error);
+      setErrorMessage(true);
+      return 'fail';
     }
     localStorage.setItem('token', response.token);
     navigate('/customer/products');
@@ -106,6 +103,20 @@ function Register() {
               infoClassIcon="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
               onClick={ handleRegisterClick }
             />
+          </div>
+          <div className="flex justify-center items-center">
+            {errorMessage
+            && (
+              <div
+                className="w-1/2 text-center border-2 rounded-md border-amber-800 py-2"
+              >
+                <p
+                  data-testid="common_register__element-invalid_register"
+                  className="text-amber-800 text-sm font-medium"
+                >
+                  Dados em formato inválido
+                </p>
+              </div>)}
           </div>
         </div>
       </div>

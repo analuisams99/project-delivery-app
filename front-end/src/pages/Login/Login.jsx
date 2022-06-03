@@ -21,7 +21,6 @@ function Login() {
 
   const handleLoginClick = async () => {
     const response = await postLogin({ email, password });
-    console.log(response);
     if (!response.token) {
       setErrorMessage(true);
       return 'fail';
@@ -103,11 +102,20 @@ function Login() {
               onClick={ handleRegisterClick }
             />
           </div>
-          {errorMessage
+          <div className="flex justify-center items-center">
+            {errorMessage
             && (
-              <p data-testid="common_login__element-invalid-email">
-                Login ou Senha inválidos
-              </p>)}
+              <div
+                className="w-1/2 text-center border-2 rounded-md border-amber-800 py-2"
+              >
+                <p
+                  data-testid="common_login__element-invalid-email"
+                  className="text-amber-800 text-sm font-medium"
+                >
+                  Login ou Senha inválidos
+                </p>
+              </div>)}
+          </div>
         </div>
       </div>
     </div>
