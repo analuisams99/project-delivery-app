@@ -47,11 +47,10 @@ const createUserAdmin = async (req, res) => {
 const getUsers = async (req, res) => { 
   try {
     const response = await UserService.getUsers();
-    
     if (!response) {
       return res.status(400).json(noUserDataMessage);
     }
-    return res.status(201).json(response);   
+    return res.status(200).json(response);   
     } catch (err) {
     res.status(500).json({ error: err.message });   
   }
@@ -64,7 +63,7 @@ const getSellers = async (req, res) => {
     if (!response) {
       return res.status(400).json(noUserDataMessage);
     }
-    return res.status(201).json(response);   
+    return res.status(200).json(response);   
     } catch (err) {
     res.status(500).json({ error: err.message });   
   }
