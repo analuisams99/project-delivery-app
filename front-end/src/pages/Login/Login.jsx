@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../images/logo.svg';
-import LoginInput from './components/LoginInput';
-import LoginButton from './components/LoginButton';
+import GenericInput from '../../components/GenericInput';
+import GenericButton from '../../components/GenericButton';
 import { postLogin } from '../../services/api';
 
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const pushLogin = async (userData) => {
     const response = await postLogin(userData);
@@ -25,8 +26,9 @@ function Login() {
 
   const handleLoginClick = async () => {
     const response = await pushLogin({ email, password });
-    if (!response.token) {
-      return console.log(response.error);
+    console.log(response);
+    if (response.token) {
+      setErrorMessage(true);
     }
     localStorage.setItem('token', response.token);
     navigate('/customer/products');
@@ -56,8 +58,8 @@ function Login() {
         <div className="mt-8 space-y-6">
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
-            <LoginInput
-              id="email-address"
+            <GenericInput
+              id="common_login__input-email"
               name="email"
               type="email"
               label="Email address"
@@ -68,8 +70,8 @@ function Login() {
               placeholder="Email"
               onChange={ handleChangeEmail }
             />
-            <LoginInput
-              id="password"
+            <GenericInput
+              id="common_login__input-password"
               name="password"
               type="password"
               label="Password"
@@ -82,9 +84,9 @@ function Login() {
             />
           </div>
           <div>
-            <LoginButton
+            <GenericButton
               name="Login"
-              id="login-button"
+              id="common_login__button-login"
               infoClassBtn="group relative w-full my-2 flex justify-center py-2 px-4
               border border-transparent text-sm font-medium rounded-md text-white
               bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2
@@ -93,9 +95,9 @@ function Login() {
               infoClassIcon="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
               onClick={ handleLoginClick }
             />
-            <LoginButton
+            <GenericButton
               name="Criar conta"
-              id="register-button"
+              id="common_login__button-register"
               infoClassBtn="group relative w-full flex justify-center py-2 px-4 border
               border-transparent text-sm font-medium rounded-md text-white bg-indigo-600
               hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2
@@ -105,6 +107,11 @@ function Login() {
               onClick={ handleRegisterClick }
             />
           </div>
+          { errorMessage
+            && (
+              <p data-testid="common_login__element-invalid-email">
+                Login ou Senha inválidos
+              </p>)}
         </div>
       </div>
     </div>

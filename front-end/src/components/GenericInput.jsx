@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function LoginInput(props) {
+function GenericInput(props) {
   const { name, type, label, id, infoClass, placeholder, onChange } = props;
   return (
     <div>
@@ -10,6 +10,7 @@ function LoginInput(props) {
       </label>
       <input
         id={ id }
+        data-testid={ id }
         name={ name }
         type={ type }
         autoComplete={ name }
@@ -22,7 +23,7 @@ function LoginInput(props) {
   );
 }
 
-LoginInput.propTypes = {
+GenericInput.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
@@ -32,4 +33,4 @@ LoginInput.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-export default LoginInput;
+export default GenericInput;

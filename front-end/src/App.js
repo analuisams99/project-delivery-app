@@ -3,7 +3,7 @@ import { Login } from './pages';
 
 function App() {
   return (
-    <div>
+    <div className="h-screen">
       <Login />
     </div>
   );

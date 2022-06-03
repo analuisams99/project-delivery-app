@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { LockClosedIcon } from '@heroicons/react/solid';
 
-function LoginButton(props) {
+function GenericButton(props) {
   const { name, id, infoClassBtn, infoClassSpan, infoClassIcon, onClick } = props;
   return (
     <button
       type="submit"
       className={ infoClassBtn }
       id={ id }
+      data-testid={ id }
       onClick={ onClick }
     >
       <span className={ infoClassSpan }>
@@ -22,7 +23,7 @@ function LoginButton(props) {
   );
 }
 
-LoginButton.propTypes = {
+GenericButton.propTypes = {
   name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   infoClassBtn: PropTypes.string.isRequired,
@@ -31,4 +32,4 @@ LoginButton.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-export default LoginButton;
+export default GenericButton;

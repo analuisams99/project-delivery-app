@@ -5,14 +5,18 @@ const api = axios.create({
 });
 
 const postLogin = async (loginData) => {
-  const { data } = await api.post('/login', loginData, {
-    headers: { schema: 'loginSchema' },
-  });
-  return data;
+  try {
+    const { data } = await api.post('/login', loginData, {
+      headers: { schema: 'loginSchema' },
+    });
+    return data;
+  } catch (error) {
+    return error.response;
+  }
 };
 
 const postRegister = async (registerData) => {
-  const { data } = await api.post('/register', registerData, {
+  const { data } = await api.post('/users', registerData, {
     headers: { schema: 'newUserSchema' },
   });
   return data;
