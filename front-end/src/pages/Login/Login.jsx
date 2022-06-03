@@ -10,13 +10,27 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState(false);
+  const [btnIsDisabled, setBtnIsDisabled] = useState(true);
+
+  const verifyInput = (emailC, passwordC) => {
+    const emailValidation = /\S+@\S+.com/;
+    const emailVerified = emailValidation.test(emailC);
+    const passwordMinLength = 5;
+    if (emailVerified && passwordC.length > passwordMinLength) {
+      setBtnIsDisabled(false);
+      return console.log('entrou');
+    }
+    setBtnIsDisabled(true);
+  };
 
   const handleChangeEmail = ({ target }) => {
     setEmail(target.value);
+    verifyInput(target.value, password);
   };
 
   const handleChangePassword = ({ target }) => {
     setPassword(target.value);
+    verifyInput(email, target.value);
   };
 
   const handleLoginClick = async () => {
@@ -57,6 +71,7 @@ function Login() {
               id="common_login__input-email"
               name="email"
               type="email"
+              value={ email }
               label="Email address"
               infoClass="appearance-none rounded-none relative block w-full px-3 py-2
                 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md
@@ -69,6 +84,7 @@ function Login() {
               id="common_login__input-password"
               name="password"
               type="password"
+              value={ password }
               label="Password"
               infoClass="appearance-none rounded-none relative block w-full px-3 py-2
                 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md
@@ -84,10 +100,11 @@ function Login() {
               id="common_login__button-login"
               infoClassBtn="group relative w-full my-2 flex justify-center py-2 px-4
               border border-transparent text-sm font-medium rounded-md text-white
-              bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2
-              focus:ring-offset-2 focus:ring-indigo-500"
+              bg-indigo-600 disabled:bg-indigo-400 hover:bg-indigo-700 focus:outline-none
+              focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               infoClassSpan="absolute left-0 inset-y-0 flex items-center pl-3"
               infoClassIcon="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
+              disabled={ btnIsDisabled }
               onClick={ handleLoginClick }
             />
             <GenericButton
@@ -99,6 +116,7 @@ function Login() {
               focus:ring-indigo-500"
               infoClassSpan=""
               infoClassIcon=""
+              disabled={ false }
               onClick={ handleRegisterClick }
             />
           </div>

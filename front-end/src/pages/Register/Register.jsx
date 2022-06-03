@@ -11,17 +11,34 @@ function Register() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [errorMessage, setErrorMessage] = useState(false);
+  const [btnIsDisabled, setBtnIsDisabled] = useState(true);
+
+  const verifyInput = (emailC, passwordC, nameC) => {
+    const emailValidation = /\S+@\S+.com/;
+    const emailVerified = emailValidation.test(emailC);
+    const passwordMinLength = 5;
+    const nameMinLength = 12;
+    if (emailVerified && passwordC.length > passwordMinLength
+      && nameC.length >= nameMinLength) {
+      setBtnIsDisabled(false);
+      return console.log('entrou');
+    }
+    setBtnIsDisabled(true);
+  };
 
   const handleChangeEmail = ({ target }) => {
     setEmail(target.value);
+    verifyInput(target.value, password, name);
   };
 
   const handleChangePassword = ({ target }) => {
     setPassword(target.value);
+    verifyInput(email, target.value, name);
   };
 
   const handleChangeName = ({ target }) => {
     setName(target.value);
+    verifyInput(email, password, target.value);
   };
 
   const handleRegisterClick = async () => {
@@ -58,6 +75,7 @@ function Register() {
               id="common_register__input-name"
               name="name"
               type="text"
+              value={ name }
               label="Name"
               infoClass="appearance-none rounded-none relative block w-full px-3 py-2
                 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md
@@ -71,6 +89,7 @@ function Register() {
               name="email"
               type="email"
               label="Email address"
+              value={ email }
               infoClass="appearance-none rounded-none relative block w-full px-3 py-2
                 border border-gray-300 placeholder-gray-500 text-gray-900
                 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
@@ -83,6 +102,7 @@ function Register() {
               name="password"
               type="password"
               label="Password"
+              value={ password }
               infoClass="appearance-none rounded-none relative block w-full px-3 py-2
                 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md
                 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
@@ -95,12 +115,13 @@ function Register() {
             <GenericButton
               name="Cadastrar"
               id="common_register__button-register"
-              infoClassBtn="group relative w-full my-2 flex justify-center py-4 px-4
+              infoClassBtn="group relative w-full my-2 h-12 flex justify-center py-3 px-4
               border border-transparent text-sm font-medium rounded-md text-white
-              bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2
-              focus:ring-offset-2 focus:ring-indigo-500"
+              bg-indigo-600 disabled:bg-indigo-400 hover:bg-indigo-700 focus:outline-none
+              focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               infoClassSpan="absolute left-0 inset-y-0 flex items-center pl-3"
               infoClassIcon="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
+              disabled={ btnIsDisabled }
               onClick={ handleRegisterClick }
             />
           </div>
