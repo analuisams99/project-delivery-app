@@ -1,10 +1,9 @@
 import React from 'react';
-import './App.css';
 import { Login } from './pages';
 
 function App() {
   return (
-    <div>
+    <div className="h-screen">
       <Login />
     </div>
   );
