@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { LockClosedIcon } from '@heroicons/react/solid';
 
 function GenericButton(props) {
-  const { name, id, infoClassBtn, infoClassSpan, infoClassIcon, onClick } = props;
+  const { name, id, infoClassBtn,
+    infoClassSpan, infoClassIcon, onClick, disabled } = props;
   return (
     <button
       type="submit"
@@ -11,6 +12,7 @@ function GenericButton(props) {
       id={ id }
       data-testid={ id }
       onClick={ onClick }
+      disabled={ disabled }
     >
       <span className={ infoClassSpan }>
         <LockClosedIcon
@@ -30,6 +32,7 @@ GenericButton.propTypes = {
   infoClassSpan: PropTypes.string.isRequired,
   infoClassIcon: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 export default GenericButton;

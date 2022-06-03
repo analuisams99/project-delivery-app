@@ -11,17 +11,34 @@ function Register() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [errorMessage, setErrorMessage] = useState(false);
+  const [btnIsDisabled, setBtnIsDisabled] = useState(true);
+
+  const verifyInput = () => {
+    const emailValidation = /\S+@\S+.com/;
+    const emailVerified = emailValidation.test(email);
+    const nameMinLength = 11;
+    const passwordMinLength = 5;
+    if (emailVerified && password.length >= passwordMinLength
+      && name.length >= nameMinLength) {
+      setBtnIsDisabled(false);
+    } else {
+      setBtnIsDisabled(true);
+    }
+  };
 
   const handleChangeEmail = ({ target }) => {
     setEmail(target.value);
+    verifyInput();
   };
 
   const handleChangePassword = ({ target }) => {
     setPassword(target.value);
+    verifyInput();
   };
 
   const handleChangeName = ({ target }) => {
     setName(target.value);
+    verifyInput();
   };
 
   const handleRegisterClick = async () => {
@@ -95,12 +112,13 @@ function Register() {
             <GenericButton
               name="Cadastrar"
               id="common_register__button-register"
-              infoClassBtn="group relative w-full my-2 flex justify-center py-4 px-4
+              infoClassBtn="group relative w-full my-2 h-12 flex justify-center py-3 px-4
               border border-transparent text-sm font-medium rounded-md text-white
-              bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2
-              focus:ring-offset-2 focus:ring-indigo-500"
+              bg-indigo-600 disabled:bg-indigo-400 hover:bg-indigo-700 focus:outline-none
+              focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               infoClassSpan="absolute left-0 inset-y-0 flex items-center pl-3"
               infoClassIcon="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
+              disabled={ btnIsDisabled }
               onClick={ handleRegisterClick }
             />
           </div>
