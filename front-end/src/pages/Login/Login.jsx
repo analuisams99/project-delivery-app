@@ -11,11 +11,6 @@ function Login() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState(false);
 
-  const pushLogin = async (userData) => {
-    const response = await postLogin(userData);
-    return response;
-  };
-
   const handleChangeEmail = ({ target }) => {
     setEmail(target.value);
   };
@@ -25,10 +20,11 @@ function Login() {
   };
 
   const handleLoginClick = async () => {
-    const response = await pushLogin({ email, password });
+    const response = await postLogin({ email, password });
     console.log(response);
-    if (response.token) {
+    if (!response.token) {
       setErrorMessage(true);
+      return 'fail';
     }
     localStorage.setItem('token', response.token);
     navigate('/customer/products');
@@ -107,7 +103,7 @@ function Login() {
               onClick={ handleRegisterClick }
             />
           </div>
-          { errorMessage
+          {errorMessage
             && (
               <p data-testid="common_login__element-invalid-email">
                 Login ou Senha inválidos
