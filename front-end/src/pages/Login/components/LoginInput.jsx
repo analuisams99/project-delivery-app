@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function LoginInput(props) {
-  const { name, type, label, id, infoClass, placeholder } = props;
+  const { name, type, label, id, infoClass, placeholder, onChange } = props;
   return (
     <div>
       <label htmlFor={ id } className="sr-only">
@@ -16,6 +16,7 @@ function LoginInput(props) {
         required
         className={ infoClass }
         placeholder={ placeholder }
+        onChange={ onChange }
       />
     </div>
   );
@@ -28,6 +29,7 @@ LoginInput.propTypes = {
   id: PropTypes.string.isRequired,
   infoClass: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default LoginInput;
