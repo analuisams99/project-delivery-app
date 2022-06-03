@@ -13,32 +13,32 @@ function Register() {
   const [errorMessage, setErrorMessage] = useState(false);
   const [btnIsDisabled, setBtnIsDisabled] = useState(true);
 
-  const verifyInput = () => {
+  const verifyInput = (emailC, passwordC, nameC) => {
     const emailValidation = /\S+@\S+.com/;
-    const emailVerified = emailValidation.test(email);
-    const nameMinLength = 11;
+    const emailVerified = emailValidation.test(emailC);
     const passwordMinLength = 5;
-    if (emailVerified && password.length >= passwordMinLength
-      && name.length >= nameMinLength) {
+    const nameMinLength = 12;
+    if (emailVerified && passwordC.length > passwordMinLength
+      && nameC.length >= nameMinLength) {
       setBtnIsDisabled(false);
-    } else {
-      setBtnIsDisabled(true);
+      return console.log('entrou');
     }
+    setBtnIsDisabled(true);
   };
 
   const handleChangeEmail = ({ target }) => {
     setEmail(target.value);
-    verifyInput();
+    verifyInput(target.value, password, name);
   };
 
   const handleChangePassword = ({ target }) => {
     setPassword(target.value);
-    verifyInput();
+    verifyInput(email, target.value, name);
   };
 
   const handleChangeName = ({ target }) => {
     setName(target.value);
-    verifyInput();
+    verifyInput(email, password, target.value);
   };
 
   const handleRegisterClick = async () => {
@@ -75,6 +75,7 @@ function Register() {
               id="common_register__input-name"
               name="name"
               type="text"
+              value={ name }
               label="Name"
               infoClass="appearance-none rounded-none relative block w-full px-3 py-2
                 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md
@@ -88,6 +89,7 @@ function Register() {
               name="email"
               type="email"
               label="Email address"
+              value={ email }
               infoClass="appearance-none rounded-none relative block w-full px-3 py-2
                 border border-gray-300 placeholder-gray-500 text-gray-900
                 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500
@@ -100,6 +102,7 @@ function Register() {
               name="password"
               type="password"
               label="Password"
+              value={ password }
               infoClass="appearance-none rounded-none relative block w-full px-3 py-2
                 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md
                 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500

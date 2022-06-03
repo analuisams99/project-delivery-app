@@ -12,25 +12,25 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState(false);
   const [btnIsDisabled, setBtnIsDisabled] = useState(true);
 
-  const verifyInput = () => {
+  const verifyInput = (emailC, passwordC) => {
     const emailValidation = /\S+@\S+.com/;
-    const emailVerified = emailValidation.test(email);
+    const emailVerified = emailValidation.test(emailC);
     const passwordMinLength = 5;
-    if (emailVerified && password.length >= passwordMinLength) {
+    if (emailVerified && passwordC.length > passwordMinLength) {
       setBtnIsDisabled(false);
-    } else {
-      setBtnIsDisabled(true);
+      return console.log('entrou');
     }
+    setBtnIsDisabled(true);
   };
 
   const handleChangeEmail = ({ target }) => {
     setEmail(target.value);
-    verifyInput();
+    verifyInput(target.value, password);
   };
 
   const handleChangePassword = ({ target }) => {
     setPassword(target.value);
-    verifyInput();
+    verifyInput(email, target.value);
   };
 
   const handleLoginClick = async () => {
@@ -71,6 +71,7 @@ function Login() {
               id="common_login__input-email"
               name="email"
               type="email"
+              value={ email }
               label="Email address"
               infoClass="appearance-none rounded-none relative block w-full px-3 py-2
                 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md
@@ -83,6 +84,7 @@ function Login() {
               id="common_login__input-password"
               name="password"
               type="password"
+              value={ password }
               label="Password"
               infoClass="appearance-none rounded-none relative block w-full px-3 py-2
                 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md
