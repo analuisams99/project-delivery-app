@@ -1,12 +1,13 @@
 const express = require('express');
 const UserController = require('../controllers/userController');
+const { loginExists, userUnexists } = require('../middlewares/generalValidations');
 const { checkAdmin, authorizationGeneral } = require('../middlewares/tokenAuth');
 const Validation = require('../middlewares/validations');
 
 const router = express.Router();
 
-router.post('/login', Validation, UserController.login);
-router.post('/users', Validation, UserController.createUser);
+router.post('/login', Validation, loginExists, UserController.login);
+router.post('/users', Validation, userUnexists, UserController.createUser);
 router.post('/users/admin', 
   authorizationGeneral, checkAdmin, Validation, UserController.createUserAdmin);
 

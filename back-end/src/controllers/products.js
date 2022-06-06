@@ -7,7 +7,7 @@ const getProductsController = async (_req, res) => {
 
     res.status(200).json(products);
   } catch (error) {
-    res.status(500)
+    res.status(404)
       .json({ message: 'Erro ao buscar produtos no banco' });
   }
 };
