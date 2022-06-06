@@ -22,9 +22,10 @@ const verifyUser = (authorization) => {
 const authorizationGeneral = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
+    console.log(authorization);
 
     if (!authorization) { 
-      return res.status(404).json(noToken);
+      return res.status(404).json({ message: req.headers });
     }
     const { email } = verifyUser(authorization);
 

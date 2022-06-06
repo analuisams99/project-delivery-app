@@ -28,7 +28,7 @@ const postRegister = async (registerData) => {
 
 const getProducts = async (token) => {
   try {
-    const { data } = await api.get('/products', {}, {
+    const { data } = await api.get('/products', {
       headers: { authorization: token },
     });
     return data;
@@ -39,7 +39,7 @@ const getProducts = async (token) => {
 
 const getCustomerOrders = async (token, id) => {
   try {
-    const { data } = await api.get(`/sales/customer/${id}`, {}, {
+    const { data } = await api.get(`/sales/customer/${id}`, {
       headers: { authorization: token },
     });
     return data;
@@ -50,7 +50,7 @@ const getCustomerOrders = async (token, id) => {
 
 const getOrderDetails = async (token, id) => { // passar o id da venda, não do usuário
   try {
-    const { data } = await api.get(`/sales/${id}`, {}, {
+    const { data } = await api.get(`/sales/${id}`, {
       headers: { authorization: token },
     });
     return data;
@@ -72,7 +72,7 @@ const postNewSales = async (token, salesData) => {
 
 const patchDelivered = async (token, id) => {
   try {
-    const { data } = await api.patch(`/sales/delivered/${id}`, {}, {
+    const { data } = await api.patch(`/sales/delivered/${id}`, {
       headers: { authorization: token },
     });
     return data;
@@ -83,7 +83,7 @@ const patchDelivered = async (token, id) => {
 
 const patchPrepare = async (token, id) => {
   try {
-    const { data } = await api.patch(`/sales/prepare/${id}`, {}, {
+    const { data } = await api.patch(`/sales/prepare/${id}`, {
       headers: { authorization: token },
     });
     return data;
@@ -94,7 +94,7 @@ const patchPrepare = async (token, id) => {
 
 const patchToDeliver = async (token, id) => {
   try {
-    const { data } = await api.patch(`/sales/todeliver/${id}`, {}, {
+    const { data } = await api.patch(`/sales/todeliver/${id}`, {
       headers: { authorization: token },
     });
     return data;
@@ -105,7 +105,7 @@ const patchToDeliver = async (token, id) => {
 
 const getSellerOrders = async (token, id) => {
   try {
-    const { data } = await api.get(`/sales/seller/${id}`, {}, {
+    const { data } = await api.get(`/sales/seller/${id}`, {
       headers: { authorization: token },
     });
     return data;
@@ -116,7 +116,7 @@ const getSellerOrders = async (token, id) => {
 
 const getUsers = async (token) => {
   try {
-    const { data } = await api.get('/users', {}, {
+    const { data } = await api.get('/users', {
       headers: { authorization: token },
     });
     return data;
@@ -127,7 +127,7 @@ const getUsers = async (token) => {
 
 const getSellers = async (token) => {
   try {
-    const { data } = await api.get('/users/sellers', {}, {
+    const { data } = await api.get('/users/sellers', {
       headers: { authorization: token },
     });
     return data;
@@ -138,7 +138,7 @@ const getSellers = async (token) => {
 
 const deleteUser = async (token, id) => {
   try {
-    const { data } = await api.delete(`/users/${id}`, {}, {
+    const { data } = await api.delete(`/users/${id}`, {
       headers: { authorization: token },
     });
     return data;

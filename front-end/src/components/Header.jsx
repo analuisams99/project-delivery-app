@@ -24,8 +24,14 @@ function Header({ buttons, userName }) {
           {e.name}
         </button>
       ))}
-      <p>{userName}</p>
-      <button type="button" onClick={ checkoutButton }>Sair</button>
+      <p data-testid="customer_products__element-navbar-user-full-name">{userName}</p>
+      <button
+        data-testid="customer_products__element-navbar-link-logout"
+        type="button"
+        onClick={ checkoutButton }
+      >
+        Sair
+      </button>
     </div>
   );
 }
