@@ -7,6 +7,7 @@ import CustomerOrderDetails from './CustomerOrderDetails/CustomerOrderDetails';
 import SellerOrders from './SellerOrders/SellerOrders';
 import SellerOrderDetails from './SellerOrderDetails/SellerOrderDetails';
 import AdminManage from './AdminManage/AdminManage';
+import NotFound from './NotFound/NotFound';
 
 export {
   Login,
@@ -18,4 +19,5 @@ export {
   SellerOrders,
   SellerOrderDetails,
   AdminManage,
+  NotFound,
 };
