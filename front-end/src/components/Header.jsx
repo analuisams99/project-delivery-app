@@ -33,7 +33,7 @@ function Header({ buttons, userName }) {
 Header.propTypes = {
   buttons: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
-    role: PropTypes.func,
+    role: PropTypes.string,
     testId: PropTypes.string,
   })).isRequired,
   userName: PropTypes.string.isRequired,
