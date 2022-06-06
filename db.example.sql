@@ -1,6 +1,6 @@
 -- Utilizar como referência para migrations e seeds
 
--- 'delivery-app' para produção
+-- 'delivery-app' para produção;
 -- 'delivery-app-dev' para desenvolvimento
 -- 'delivery-app-test' para o avaliador
 DROP DATABASE IF EXISTS `delivery-app`;
