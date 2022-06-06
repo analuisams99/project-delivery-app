@@ -22,6 +22,7 @@ const deleteUser = async (id) => {
 
 const getUserByEmail = async (email) => { 
    const user = await User.findOne({ where: { email } });   
+
    return user;
 };
 
