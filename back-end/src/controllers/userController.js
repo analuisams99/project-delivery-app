@@ -5,8 +5,8 @@ const noUserDataMessage = { message: 'No users in data base' };
 const login = async (req, res) => { 
   try {
     const { email, password } = req.body; 
-    const response = await UserService.login(email, password);
-    
+
+    const response = await UserService.login(email, password);    
     if ('error' in response) {
       return res.status(400).json(response);
     }
