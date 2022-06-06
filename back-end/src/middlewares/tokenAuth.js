@@ -25,7 +25,7 @@ const authorizationGeneral = async (req, res, next) => {
     console.log(authorization);
 
     if (!authorization) { 
-      return res.status(404).json({ message: req.headers });
+      return res.status(404).json(noToken);
     }
     const { email } = verifyUser(authorization);
 
