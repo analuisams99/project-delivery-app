@@ -40,7 +40,20 @@ function Login() {
       return 'fail';
     }
     localStorage.setItem('token', response.token);
-    navigate('/customer/products');
+
+    switch (response.role) {
+    case 'administrator':
+      navigate('/admin/manage');
+      break;
+    case 'seller':
+      navigate('/seller/orders');
+      break;
+    case 'customer':
+      navigate('/customer/products');
+      break;
+    default:
+      navigate('/customer/notfound');
+    }
   };
 
   const handleRegisterClick = () => {

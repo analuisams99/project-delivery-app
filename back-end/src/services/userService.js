@@ -22,13 +22,14 @@ const deleteUser = async (id) => {
 
 const getUserByEmail = async (email) => { 
    const user = await User.findOne({ where: { email } });   
+
    return user;
 };
 
 const login = async (loginEmail, loginPassword) => { 
    const { id, name, password, role } = await getUserByEmail(loginEmail);
    if (password === md5(loginPassword)) { 
-      return { token: createToken({ id, name, email: loginEmail, role }) };
+      return { token: createToken({ id, name, email: loginEmail, role }), role };
    }
    return { error: 'Invalid password' };
 };

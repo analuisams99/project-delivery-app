@@ -126,7 +126,7 @@ describe(requirement(9), () => {
   });
 });
 
-describe(requirement(10), () => {
+describe.only(requirement(10), () => {
   const testUser = newUser({ passwordLen: lengthRules.password });
 
   test(`O avaliador tentará realizar o fluxo de cadastro duas vezes, com os dados: ${JSON.stringify(
