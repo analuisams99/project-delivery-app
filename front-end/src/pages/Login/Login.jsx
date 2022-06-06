@@ -39,7 +39,7 @@ function Login() {
       setErrorMessage(true);
       return 'fail';
     }
-    localStorage.setItem('token', response.token);
+    localStorage.setItem('user', JSON.stringify(response));
 
     switch (response.role) {
     case 'administrator':
