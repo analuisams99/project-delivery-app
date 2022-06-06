@@ -47,7 +47,7 @@ function Register() {
       setErrorMessage(true);
       return 'fail';
     }
-    localStorage.setItem('token', response.token);
+    localStorage.setItem('user', JSON.stringify(response));
     navigate('/customer/products');
   };
 
