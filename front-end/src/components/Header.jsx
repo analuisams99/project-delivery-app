@@ -10,10 +10,17 @@ function Header({ buttons, userName }) {
     navigate('/login');
   };
 
+  const handleClick = (rota) => navigate(`/${rota}`);
+
   return (
     <div>
       {buttons.map((e) => (
-        <button type="button" key={ e.name } data-testid={ e.testId } onClick={ e.role }>
+        <button
+          type="button"
+          key={ e.name }
+          data-testid={ e.testId }
+          onClick={ () => handleClick(e.role) }
+        >
           {e.name}
         </button>
       ))}
