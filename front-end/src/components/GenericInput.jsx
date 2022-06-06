@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function GenericInput(props) {
-  const { name, type, label, id, infoClass, placeholder, onChange } = props;
+  const { name, type, value, label, id, infoClass, placeholder, onChange } = props;
   return (
     <div>
       <label htmlFor={ id } className="sr-only">
@@ -13,6 +13,7 @@ function GenericInput(props) {
         data-testid={ id }
         name={ name }
         type={ type }
+        value={ value }
         autoComplete={ name }
         required
         className={ infoClass }
@@ -27,6 +28,7 @@ GenericInput.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   infoClass: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
