@@ -14,7 +14,7 @@ function CustomerOrders() {
   const ordersButton = {
     name: 'Meus Pedidos',
     testId: 'customer_products__element-navbar-link-orders',
-    role: handleClick(),
+    role: handleClick(),n
   };
 
   return (
