@@ -44,10 +44,10 @@ function Products() {
 
   const buttons = [
     { name: 'Produtos',
-      role: '/customer/products',
+      role: 'customer/products',
       dataId: 'customer_products__element-navbar-link-products' },
     { name: 'Meus pedidos',
-      role: '/customer/orders',
+      role: 'customer/orders',
       dataId: 'customer_products__element-navbar-link-orders' },
   ];
 
