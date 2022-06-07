@@ -29,7 +29,9 @@ const getUserByEmail = async (email) => {
 const login = async (loginEmail, loginPassword) => {
   const { id, name, password, role } = await getUserByEmail(loginEmail);
   if (password === md5(loginPassword)) {
-    return { name,
+    return {
+      id,
+      name,
       email: loginEmail,
       role,
       token: createToken({ id, name, email: loginEmail, role }) };
@@ -47,6 +49,7 @@ const createUser = async (userName, userEmail, userPassword) => {
   const role = 'customer';
   const { id } = await User.create({ name: userName, email: userEmail, password, role });
   return {
+    id,
     name: userName,
     email: userEmail,
     role,
