@@ -35,14 +35,14 @@ const adminUser ={
   role: "administrator"
 }
 
-const validCostumer = {        
+const validCustomer = {        
   name: 'Roberto dos Santos',
   email: 'mattos@gmail.com',
   password: '00000000536',
 };
 
 module.exports = { 
-  validCostumer,
+  validCustomer,
   findUserMock,
   loginValid,
   loginInvalid,

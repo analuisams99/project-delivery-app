@@ -55,7 +55,7 @@ const mockResultGetOneSale = {
 	]
 };
 
-const mockResultGetCostumerSales = [{
+const mockResultGetCustomerSales = [{
   id: 1,
   userId: 3,
   sellerId: 2,
@@ -98,6 +98,6 @@ const mockResultGetSellerSales = [{
 module.exports = {
   mockResultGetSales,
   mockResultGetOneSale,
-  mockResultGetCostumerSales,
+  mockResultGetCustomerSales,
   mockResultGetSellerSales,
 }

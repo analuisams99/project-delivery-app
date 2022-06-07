@@ -3,7 +3,7 @@ const express = require('express');
 const {
   createSale,
   getAllSales,
-  getCostumerSales, getSellerSales, getSale,
+  getCustomerSales, getSellerSales, getSale,
   statusUpdateDelivered, statusUpdatePrepare, statusUpdateToDeliver,
 } = require('../controllers/SalesController');
 
@@ -15,7 +15,7 @@ const salesRoute = express.Router();
 salesRoute.get('/', authorizationGeneral, getAllSales);
 salesRoute.post('/', authorizationGeneral, Validation, createSale);
 salesRoute.get('/:id', authorizationGeneral, getSale); // id da venda
-salesRoute.get('/costumer/:id', authorizationGeneral, getCostumerSales); // id do usuário costumer
+salesRoute.get('/customer/:id', authorizationGeneral, getCustomerSales); // id do usuário customer
 salesRoute.get('/seller/:id', authorizationGeneral, getSellerSales); // id do usuário seller
 
 salesRoute.patch('/delivered/:id', authorizationGeneral, statusUpdateDelivered);

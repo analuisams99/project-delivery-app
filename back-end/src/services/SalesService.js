@@ -47,12 +47,12 @@ const listOneSale = async (id) => {
   return sale;
 };
 
-const listCostumerSales = async (id) => {
-  const costumerSales = await Sale.findAll({ where: { userId: id } });
+const listCustomerSales = async (id) => {
+  const customerSales = await Sale.findAll({ where: { userId: id } });
 
-  if (!costumerSales) throw new Error('No costumer sales found');
+  if (!customerSales) throw new Error('No customer sales found');
 
-  return costumerSales;
+  return customerSales;
 };
 
 const listSellerSales = async (id) => {
@@ -69,7 +69,7 @@ module.exports = {
   statusChangePrepare,
   statusChangeToDeliver,
   listAllSales,
-  listCostumerSales,
+  listCustomerSales,
   listSellerSales,
   listOneSale,
 };
