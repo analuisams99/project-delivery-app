@@ -1,7 +1,7 @@
 const {
   createSales,
   statusChangeDelivered, statusChangePrepare, statusChangeToDeliver,
-  listAllSales, listOneSale, listCostumerSales, listSellerSales,
+  listAllSales, listOneSale, listCustomerSales, listSellerSales,
 } = require('../services/SalesService');
 
 const SUCCESSFULLY_MESSAGE = 'Successfully updated';
@@ -63,11 +63,11 @@ const getSale = async (req, res, _next) => {
   }
 };
 
-const getCostumerSales = async (req, res, _next) => {
+const getCustomerSales = async (req, res, _next) => {
   try {
     const { id } = req.params;
-    const costumerSales = await listCostumerSales(id);
-    return res.status(200).json(costumerSales);
+    const customerSales = await listCustomerSales(id);
+    return res.status(200).json(customerSales);
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -89,7 +89,7 @@ module.exports = {
   statusUpdatePrepare,
   statusUpdateToDeliver,
   getAllSales,
-  getCostumerSales,
+  getCustomerSales,
   getSellerSales,
   getSale,
 };

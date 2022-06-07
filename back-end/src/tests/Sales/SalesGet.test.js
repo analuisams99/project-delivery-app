@@ -7,7 +7,7 @@ const { Sale, User } = require('../../database/models');
 const { usersDb } = require('../mocks/mockUserDb');
 const { createToken } = require('../../middlewares/tokenAuth');
 const { 
-  mockResultGetCostumerSales,
+  mockResultGetCustomerSales,
   mockResultGetSellerSales,
   mockResultGetOneSale,
   mockResultGetSales 
@@ -168,7 +168,7 @@ describe('Testando as rotas Get da camada Sales', () => {
     });
   });
 
-  describe('teste da requisição GET /sales/costumer/id', () => {
+  describe('teste da requisição GET /sales/customer/id', () => {
     beforeEach(() => {
       sinon.stub(Sale, 'findAll');
       sinon.stub(User, 'findOne');
@@ -180,10 +180,10 @@ describe('Testando as rotas Get da camada Sales', () => {
     });
   
     it('se o endpoint retorna o objeto esperado dada uma requisição correta', async () => {
-      (Sale.findAll).resolves(mockResultGetCostumerSales);
+      (Sale.findAll).resolves(mockResultGetCustomerSales);
       (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
-        .get('/sales/costumer/3')
+        .get('/sales/customer/3')
         .set({ authorization: token });
   
       expect(res.status).equal(200);
@@ -205,10 +205,10 @@ describe('Testando as rotas Get da camada Sales', () => {
     });
   
     it('se o endpoint retorna uma mensagem de erro o token é inválido', async () => {
-      (Sale.findAll).resolves(mockResultGetCostumerSales);
+      (Sale.findAll).resolves(mockResultGetCustomerSales);
       (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
-        .get('/sales/costumer/3')
+        .get('/sales/customer/3')
         .set({ authorization: invalidToken });
 
         expect(res.status).equal(401);
@@ -216,10 +216,10 @@ describe('Testando as rotas Get da camada Sales', () => {
     });
 
     it('se o endpoint retorna uma mensagem de erro quando não recebe token', async () => {
-      (Sale.findAll).resolves(mockResultGetCostumerSales);
+      (Sale.findAll).resolves(mockResultGetCustomerSales);
       (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
-        .get('/sales/costumer/3')
+        .get('/sales/customer/3')
         .set({ x: 'x' });
 
         expect(res.status).equal(404);
@@ -230,7 +230,7 @@ describe('Testando as rotas Get da camada Sales', () => {
       (Sale.findAll).resolves(null);
       (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
-        .get('/sales/costumer/3')
+        .get('/sales/customer/3')
         .set({ authorization: token });
 
         expect(res.status).equal(400);
