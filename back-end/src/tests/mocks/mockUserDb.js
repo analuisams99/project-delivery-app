@@ -1,4 +1,4 @@
-const usersDb= [
+const usersDb = [
     {
         id: 1,
         name: "Delivery App Admin",

@@ -4,7 +4,7 @@ const chaiHttp = require('chai-http');
 
 const server = require('./../../api/app');
 const { Sale, User } = require('../../database/models');
-const userData = require('../mocks/mockUserDb');
+const { usersDb } = require('../mocks/mockUserDb');
 const { createToken } = require('../../middlewares/tokenAuth');
 const { 
   mockResultGetCostumerSales,
@@ -17,7 +17,7 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-const token = createToken(userData[2]);
+const token = createToken(usersDb[2]);
 const invalidToken = 'ndghudfhbf87gf89d7g89fd7ghdfg';
 
 describe('Testando as rotas Get da camada Sales', () => {
@@ -34,7 +34,7 @@ describe('Testando as rotas Get da camada Sales', () => {
   
     it('se o endpoint retorna o objeto esperado dada uma requisição correta', async () => {
       (Sale.findAll).resolves(mockResultGetSales);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/sales')
         .set({ authorization: token });
@@ -59,7 +59,7 @@ describe('Testando as rotas Get da camada Sales', () => {
   
     it('se o endpoint retorna uma mensagem de erro o token é inválido', async () => {
       (Sale.findAll).resolves(mockResultGetSales);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/sales')
         .set({ authorization: invalidToken });
@@ -70,7 +70,7 @@ describe('Testando as rotas Get da camada Sales', () => {
 
     it('se o endpoint retorna uma mensagem de erro quando não recebe token', async () => {
       (Sale.findAll).resolves(mockResultGetSales);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/sales')
         .set({ x: 'x' });
@@ -81,7 +81,7 @@ describe('Testando as rotas Get da camada Sales', () => {
 
     it('se o endpoint retorna uma erro ao não receber resposta do BD', async () => {
       (Sale.findAll).resolves(null);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/sales')
         .set({ authorization: token });
@@ -104,7 +104,7 @@ describe('Testando as rotas Get da camada Sales', () => {
   
     it('se o endpoint retorna o objeto esperado dada uma requisição correta', async () => {
       (Sale.findOne).resolves(mockResultGetOneSale);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/sales/3')
         .set({ authorization: token });
@@ -136,7 +136,7 @@ describe('Testando as rotas Get da camada Sales', () => {
   
     it('se o endpoint retorna uma mensagem de erro o token é inválido', async () => {
       (Sale.findOne).resolves(mockResultGetOneSale);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/sales/3')
         .set({ authorization: invalidToken });
@@ -147,7 +147,7 @@ describe('Testando as rotas Get da camada Sales', () => {
 
     it('se o endpoint retorna uma mensagem de erro quando não recebe token', async () => {
       (Sale.findOne).resolves(mockResultGetOneSale);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/sales/3')
         .set({ x: 'x' });
@@ -158,7 +158,7 @@ describe('Testando as rotas Get da camada Sales', () => {
 
     it('se o endpoint retorna uma erro ao não receber resposta do BD', async () => {
       (Sale.findOne).resolves(null);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/sales/3')
         .set({ authorization: token });
@@ -181,7 +181,7 @@ describe('Testando as rotas Get da camada Sales', () => {
   
     it('se o endpoint retorna o objeto esperado dada uma requisição correta', async () => {
       (Sale.findAll).resolves(mockResultGetCostumerSales);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/sales/costumer/3')
         .set({ authorization: token });
@@ -206,7 +206,7 @@ describe('Testando as rotas Get da camada Sales', () => {
   
     it('se o endpoint retorna uma mensagem de erro o token é inválido', async () => {
       (Sale.findAll).resolves(mockResultGetCostumerSales);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/sales/costumer/3')
         .set({ authorization: invalidToken });
@@ -217,7 +217,7 @@ describe('Testando as rotas Get da camada Sales', () => {
 
     it('se o endpoint retorna uma mensagem de erro quando não recebe token', async () => {
       (Sale.findAll).resolves(mockResultGetCostumerSales);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/sales/costumer/3')
         .set({ x: 'x' });
@@ -228,7 +228,7 @@ describe('Testando as rotas Get da camada Sales', () => {
 
     it('se o endpoint retorna uma erro ao não receber resposta do BD', async () => {
       (Sale.findAll).resolves(null);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/sales/costumer/3')
         .set({ authorization: token });
@@ -251,7 +251,7 @@ describe('Testando as rotas Get da camada Sales', () => {
   
     it('se o endpoint retorna o objeto esperado dada uma requisição correta', async () => {
       (Sale.findAll).resolves(mockResultGetSellerSales);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/sales/seller/1')
         .set({ authorization: token });
@@ -276,7 +276,7 @@ describe('Testando as rotas Get da camada Sales', () => {
   
     it('se o endpoint retorna uma mensagem de erro o token é inválido', async () => {
       (Sale.findAll).resolves(mockResultGetSellerSales);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/sales/seller/1')
         .set({ authorization: invalidToken });
@@ -287,7 +287,7 @@ describe('Testando as rotas Get da camada Sales', () => {
 
     it('se o endpoint retorna uma mensagem de erro quando não recebe token', async () => {
       (Sale.findAll).resolves(mockResultGetSellerSales);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/sales/seller/1')
         .set({ x: 'x' });
@@ -298,7 +298,7 @@ describe('Testando as rotas Get da camada Sales', () => {
 
     it('se o endpoint retorna uma erro ao não receber resposta do BD', async () => {
       (Sale.findAll).resolves(null);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/sales/seller/1')
         .set({ authorization: token });

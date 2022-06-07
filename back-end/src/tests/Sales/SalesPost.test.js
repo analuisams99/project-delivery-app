@@ -11,15 +11,15 @@ const { expect } = chai;
 const { Sale, SaleProduct, User } = require('../../database/models');
 
 const {mockSale, mockSaleResponse, mockSaleWrong} = require('../mocks/SalesPostMocks');
-const userData = require('../mocks/mockUserDb');
-const {createToken} = require('../../middlewares/tokenAuth');
+const { usersDb } = require('../mocks/mockUserDb');
+const { createToken } = require('../../middlewares/tokenAuth');
 
 describe('Testa rota POST /sales', () => {
   let chaiHttpResponse;
 
   before(() => {
     sinon.stub(Sale, 'create')
-    sinon.stub(User, 'findOne').resolves(userData[0]);
+    sinon.stub(User, 'findOne').resolves(usersDb[0]);
     sinon.stub(SaleProduct, 'create').resolves({});
   });
 
@@ -32,7 +32,7 @@ describe('Testa rota POST /sales', () => {
   it('se o endpoint retorna o objeto esperado dada uma requisição correta', async () => {
     (Sale.create).resolves(mockSaleResponse);
 
-    const token = createToken(userData[0]);
+    const token = createToken(usersDb[0]);
     
     chaiHttpResponse = await chai.request(server).post('/sales').send(mockSale)
       .set({'authorization': token, schema: 'salesSchema'});
@@ -56,7 +56,7 @@ describe('Testa rota POST /sales', () => {
   });
 
   it('se o endpoint retorna uma mensagem de erro quando a requisição é feita sem um dos campos obrigatórios do body (userId)', async () => {
-    const token = createToken(userData[0]);
+    const token = createToken(usersDb[0]);
     chaiHttpResponse = await chai.request(server).post('/sales').send(mockSaleWrong)
       .set({'authorization': token, schema: 'salesSchema'});
 
@@ -68,7 +68,7 @@ describe('Testa rota POST /sales', () => {
   });
 
   it('se o endpoint retorna uma mensagem de erro quando a requisição é feita sem o header schema', async () => {
-    const token = createToken(userData[0]);
+    const token = createToken(usersDb[0]);
     chaiHttpResponse = await chai.request(server).post('/sales').send(mockSaleWrong)
       .set({'authorization': token });
 
