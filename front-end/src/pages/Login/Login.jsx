@@ -39,7 +39,9 @@ function Login() {
       setErrorMessage(true);
       return 'fail';
     }
-    localStorage.setItem('user', JSON.stringify(response));
+    const { id, name, email: userEmail, role, token } = response;
+    localStorage.setItem('user', JSON.stringify({ name, userEmail, role, token }));
+    localStorage.setItem('userId', JSON.stringify({ id }));
 
     switch (response.role) {
     case 'administrator':
