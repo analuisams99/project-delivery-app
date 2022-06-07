@@ -44,10 +44,10 @@ function Products() {
 
   const buttons = [
     { name: 'Produtos',
-      role: '/customer/products',
+      role: 'customer/products',
       dataId: 'customer_products__element-navbar-link-products' },
     { name: 'Meus pedidos',
-      role: '/customer/orders',
+      role: 'customer/orders',
       dataId: 'customer_products__element-navbar-link-orders' },
   ];
 
@@ -61,29 +61,38 @@ function Products() {
   }, []);
 
   return (
-    <div className="bg-white">
+    <div className="flex flex-col bg-slate-200">
       <Header buttons={ buttons } userName={ userName } />
-      <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">Produtos</h2>
-        <button
-          type="button"
-          onClick={ sendToCheckout }
-          data-testid="customer_products__button-cart"
-          disabled={ totalPrice === 0 }
-          className="py-2 px-4 border border-transparent text-sm font-medium
-            rounded-md text-white bg-indigo-600 disabled:bg-indigo-400
-            hover:bg-indigo-700"
-        >
-          Ver carrinho:
-          {' '}
-          R$
-          {' '}
-          <span
-            data-testid="customer_products__checkout-bottom-value"
+      <div
+        className="max-w-2xl mx-auto py-16 px-4 sm:px-6
+          lg:max-w-7xl lg:px-8"
+      >
+        <div className="flex mb-12 justify-between bg-slate-200 md:mx-4">
+          <h2
+            className="text-2xl md:text-3xl font-medium tracking-tight text-gray-700"
           >
-            {convertPrice(totalPrice)}
-          </span>
-        </button>
+            Produtos
+          </h2>
+          <button
+            type="button"
+            onClick={ sendToCheckout }
+            data-testid="customer_products__button-cart"
+            disabled={ totalPrice === 0 }
+            className="py-2 px-4 border border-transparent text-sm font-medium
+              rounded-md text-white bg-indigo-600 disabled:bg-indigo-400
+              hover:bg-indigo-700"
+          >
+            Ver carrinho:
+            {' '}
+            R$
+            {' '}
+            <span
+              data-testid="customer_products__checkout-bottom-value"
+            >
+              {convertPrice(totalPrice)}
+            </span>
+          </button>
+        </div>
         <div
           className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6
           sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"

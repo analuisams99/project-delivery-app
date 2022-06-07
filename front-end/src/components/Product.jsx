@@ -40,51 +40,56 @@ function Product({ product, addToCart }) {
           className="w-full h-full object-center object-cover lg:w-full lg:h-full"
         />
       </div>
-      <div className="mt-4 flex justify-between">
-        <div>
-          <h3
-            className="text-sm text-gray-700"
-            data-testid={ `customer_products__element-card-title-${id}` }
-          >
-            {name}
-          </h3>
-          <div className="flex">
-            <button
-              className="mr-6 px-2 border border-transparent text-sm font-medium
-              rounded-md text-white bg-indigo-600 disabled:bg-indigo-400
-              hover:bg-indigo-700"
-              type="button"
-              onClick={ handleDeductBtn }
-              data-testid={ `customer_products__button-card-rm-item-${id}` }
-            >
-              -
-            </button>
-            <input
-              type="number"
-              value={ quantity }
-              onChange={ handleChangeQnt }
-              min="0"
-              className="px-1 w-10"
-              data-testid={ `customer_products__input-card-quantity-${id}` }
-            />
-            <button
-              className="mx-2 px-2 border border-transparent text-sm font-medium
-              rounded-md text-white bg-indigo-600 disabled:bg-indigo-400
-              hover:bg-indigo-700"
-              type="button"
-              onClick={ handleSumBtn }
-              data-testid={ `customer_products__button-card-add-item-${id}` }
-            >
-              +
-            </button>
-          </div>
-        </div>
+      <div className="mt-4 mb-2 flex justify-between">
+        <h3
+          className="text-md text-gray-700"
+          data-testid={ `customer_products__element-card-title-${id}` }
+        >
+          {name}
+        </h3>
         <p
-          className="text-sm font-medium text-gray-900"
+          className="text-md font-medium text-gray-700"
           data-testid={ `customer_products__element-card-price-${id}` }
         >
+          <span className="text-sm font-normal text-gray-800">R$</span>
+          {' '}
           {convertPrice((+price).toFixed(2))}
         </p>
+      </div>
+      <div className="flex justify-between items-end">
+        <h3 className="text-sm text-gray-700">Unidades:</h3>
+        <div className="flex justify-end">
+          <button
+            className="w-6 mr-6 px-2 border border-gray-300
+            rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white
+            hover:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-offset-1
+            focus:ring-gray-300"
+            type="button"
+            onClick={ handleDeductBtn }
+            data-testid={ `customer_products__button-card-rm-item-${id}` }
+          >
+            -
+          </button>
+          <input
+            type="number"
+            value={ quantity }
+            onChange={ handleChangeQnt }
+            min="0"
+            className="px-1 w-10 bg-slate-200"
+            data-testid={ `customer_products__input-card-quantity-${id}` }
+          />
+          <button
+            className="w-6 px-2 border border-gray-300
+            rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white
+            hover:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-offset-1
+            focus:ring-gray-300"
+            type="button"
+            onClick={ handleSumBtn }
+            data-testid={ `customer_products__button-card-add-item-${id}` }
+          >
+            +
+          </button>
+        </div>
       </div>
     </div>
   );
