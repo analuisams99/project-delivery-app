@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+
 function Product({ product, addToCart }) {
   const [quantity, setQuantity] = useState(0);
   const { id, name, urlImage, price } = product;
@@ -68,7 +69,7 @@ function Product({ product, addToCart }) {
               data-testid={ `customer_products__input-card-quantity-${id}` }
             />
             <button
-              className="px-2 border border-transparent text-sm font-medium
+              className="mx-2 px-2 border border-transparent text-sm font-medium
               rounded-md text-white bg-indigo-600 disabled:bg-indigo-400
               hover:bg-indigo-700"
               type="button"
