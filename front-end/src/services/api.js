@@ -39,7 +39,7 @@ const getProducts = async (token) => {
 
 const getCustomerOrders = async (token, id) => {
   try {
-    const { data } = await api.get(`/sales/customer/${id}`, {
+    const { data } = await api.get(`/sales/costumer/${id}`, {
       headers: { authorization: token },
     });
     return data;
