@@ -40,7 +40,7 @@ function Login() {
       return 'fail';
     }
     const { id, name, email: userEmail, role, token } = response;
-    localStorage.setItem('user', JSON.stringify({ name, userEmail, role, token }));
+    localStorage.setItem('user', JSON.stringify({ name, email: userEmail, role, token }));
     localStorage.setItem('userId', JSON.stringify({ id }));
 
     switch (response.role) {
