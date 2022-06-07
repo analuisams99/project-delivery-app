@@ -6,13 +6,13 @@ const chaiHttp = require('chai-http');
 const server = require('../../api/app');
 const { Product, User } = require('../../database/models');
 const { createToken } = require('../../middlewares/tokenAuth');
-const userData = require('../mocks/mockUserDb');
+const { usersDb } = require('../mocks/mockUserDb');
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
-const token = createToken(userData[2]);
+const token = createToken(usersDb[2]);
 const invalidToken = 'ndghudfhbf87gf89d7g89fd7ghdfg';
 
 const mockResultGetProducts = [{
@@ -41,7 +41,7 @@ describe('Testando as rotas Get da camada Products', () => {
   
     it('se o endpoint retorna o objeto esperado dada uma requisição correta', async () => {
       (Product.findAll).resolves(mockResultGetProducts);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       
       const res = await chai.request(server)
         .get('/products')
@@ -62,7 +62,7 @@ describe('Testando as rotas Get da camada Products', () => {
   
     it('se o endpoint retorna uma mensagem de erro quando o token é inválido', async () => {
       (Product.findAll).resolves(mockResultGetProducts);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/products')
         .set({ authorization: invalidToken });
@@ -73,7 +73,7 @@ describe('Testando as rotas Get da camada Products', () => {
 
     it('se o endpoint retorna uma mensagem de erro quando não recebe token', async () => {
       (Product.findAll).resolves(mockResultGetProducts);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/products')
         .set({ x: 'x' });
@@ -84,7 +84,7 @@ describe('Testando as rotas Get da camada Products', () => {
 
     it('se o endpoint retorna uma mensagem de erro ao não receber o esperado do BD', async () => {
       (Product.findAll).resolves(null);
-      (User.findOne).resolves(userData[2]);
+      (User.findOne).resolves(usersDb[2]);
       const res = await chai.request(server)
         .get('/products')
         .set({ authorization: token });

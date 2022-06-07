@@ -59,7 +59,7 @@ module.exports = async (req, res, next) => {
     const { error } = schemas[schema].validate({ ...body });
     if (error) {
       const [status, message] = error.message.split('|');  
-      return res.status(status).json({ message });
+      return res.status(Number(status)).json({ message });
     }
    next();
 };

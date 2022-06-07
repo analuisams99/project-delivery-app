@@ -4,13 +4,13 @@ const chaiHttp = require('chai-http');
 
 const { Sale, User } = require('../../database/models');
 const { SUCCESSFULLY_MESSAGE_MOCK, INVALID_TOKEN } = require('../mocks/salesPatchMock');
-const token = createToken(userData[2]);
-const userData = require('../mocks/mockUserDb');
+const { usersDb } = require('../mocks/mockUserDb');
 const { createToken } = require('../../middlewares/tokenAuth');
 const server = require('./../../api/app');
 
 chai.use(chaiHttp);
 
+const token = createToken(usersDb[2]);
 const { expect } = chai;
 
 describe('Testa rotas PATCH de sales', () => {
@@ -19,7 +19,7 @@ describe('Testa rotas PATCH de sales', () => {
 
     beforeEach(() => {
       sinon.stub(Sale, 'update').resolves({});
-      sinon.stub(User, 'findOne').resolves(userData[2]);
+      sinon.stub(User, 'findOne').resolves(usersDb[2]);
     });
 
     afterEach(() => {
@@ -58,7 +58,7 @@ describe('Testa rotas PATCH de sales', () => {
 
     beforeEach(() => {
       sinon.stub(Sale, 'update').resolves({});
-      sinon.stub(User, 'findOne').resolves(userData[2]);
+      sinon.stub(User, 'findOne').resolves(usersDb[2]);
     });
 
     afterEach(() => {
@@ -98,7 +98,7 @@ describe('Testa rotas PATCH de sales', () => {
 
     beforeEach(() => {
       sinon.stub(Sale, 'update').resolves({});
-      sinon.stub(User, 'findOne').resolves(userData[2]);
+      sinon.stub(User, 'findOne').resolves(usersDb[2]);
     });
 
     afterEach(() => {
