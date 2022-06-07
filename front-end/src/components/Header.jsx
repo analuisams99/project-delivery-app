@@ -18,7 +18,7 @@ function Header({ buttons, userName }) {
         <button
           type="button"
           key={ e.name }
-          data-testid={ e.testId }
+          data-testid={ e.dataId }
           onClick={ () => handleClick(e.role) }
         >
           {e.name}
@@ -40,7 +40,7 @@ Header.propTypes = {
   buttons: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
     role: PropTypes.string,
-    testId: PropTypes.string,
+    dataId: PropTypes.string,
   })).isRequired,
   userName: PropTypes.string.isRequired,
 };

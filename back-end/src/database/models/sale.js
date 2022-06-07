@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: true,
       field: 'seller_id',
     },
-    totalPrice: {type: DataTypes.DECIMAL, allowNull: false},
+    totalPrice: {type: DataTypes.DECIMAL(4, 2), allowNull: false},
     deliveryAddress: {type: DataTypes.STRING, allowNull: false},
     deliveryNumber: {type: DataTypes.STRING, allowNull: false},
     saleDate: {type: DataTypes.DATE, defaultValue: DataTypes.NOW, },
