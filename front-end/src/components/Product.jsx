@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-
 function Product({ product, addToCart }) {
   const [quantity, setQuantity] = useState(0);
   const { id, name, urlImage, price } = product;
