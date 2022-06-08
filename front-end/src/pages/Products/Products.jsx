@@ -7,20 +7,31 @@ import Product from '../../components/Product';
 function Products() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState('0.00');
   const [isLoading, setIsLoading] = useState(true);
-  const userName = JSON.parse(localStorage.getItem('user')).name;
+  const [userName, setUserName] = useState('');
 
-  const getAllProducts = async () => {
+  const valitadeUser = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      localStorage.clear();
+      navigate('/login');
+    }
     const allProducts = await getProducts(user.token);
+    console.log(allProducts);
     if (!allProducts[0]) {
       localStorage.clear();
       navigate('/login');
     }
+    setUserName(user.name);
+    return allProducts;
+  };
+
+  const getAllProducts = async () => {
+    const productsList = await valitadeUser();
     const cart = JSON.parse(localStorage.getItem('cart'));
     if (!cart || cart.length === 0) {
-      const newProducts = allProducts.map((e) => ({ ...e, quantity: 0 }));
+      const newProducts = productsList.map((e) => ({ ...e, quantity: 0 }));
       setProducts(newProducts);
       setIsLoading(false);
       return newProducts;
@@ -95,7 +106,7 @@ function Products() {
             type="button"
             onClick={ sendToCheckout }
             data-testid="customer_products__button-cart"
-            disabled={ totalPrice === 0 }
+            disabled={ totalPrice === '0.00' }
             className="py-2 px-4 border border-transparent text-sm font-medium
               rounded-md text-white bg-indigo-600 disabled:bg-indigo-400
               hover:bg-indigo-700"
