@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import GenericInput from './GenericInput';
 import GenericButton from './GenericButton';
 import GenericSelect from './GenericSelect';
@@ -13,23 +14,12 @@ function FormCheckout({
   sellers,
   handleSubmitBtn,
 }) {
-  const [btnIsDisabled, setBtnIsDisabled] = useState(true);
-
-  const verifyInput = (addressC) => {
-    const addressMinLength = 8;
-    if (addressC.length >= addressMinLength) {
-      setBtnIsDisabled(false);
-    }
-    setBtnIsDisabled(true);
-  };
-
   const handleChangeSeller = ({ target }) => {
     setSeller(target.value);
   };
 
   const handleChangeAddress = ({ target }) => {
     setAddress(target.value);
-    verifyInput(target.value);
   };
 
   const handleChangeHouseNum = ({ target }) => {
@@ -97,15 +87,15 @@ function FormCheckout({
         border border-transparent text-sm font-medium rounded-md text-white
         bg-indigo-600 disabled:bg-indigo-400 hover:bg-indigo-700 focus:outline-none
         focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        disabled={ btnIsDisabled }
         onClick={ handleSubmitBtn }
+        disabled={ false }
       />
     </div>
   );
 }
 
 FormCheckout.propTypes = {
-  seller: PropTypes.string.isRequired,
+  seller: PropTypes.number.isRequired,
   setSeller: PropTypes.func.isRequired,
   address: PropTypes.string.isRequired,
   setAddress: PropTypes.func.isRequired,
@@ -113,7 +103,7 @@ FormCheckout.propTypes = {
   setHouseNum: PropTypes.func.isRequired,
   handleSubmitBtn: PropTypes.func.isRequired,
   sellers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     email: PropTypes.string,
     role: PropTypes.string,

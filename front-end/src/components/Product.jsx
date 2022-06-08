@@ -76,7 +76,7 @@ function Product({ product, addToCart }) {
             onChange={ handleChangeQnt }
             min="0"
             className="px-1 w-10 bg-slate-200"
-            data-testid={ `customer_products__input-card-quantities-${id}` }
+            data-testid={ `customer_products__input-card-quantity-${id}` }
           />
           <button
             className="w-6 px-2 border border-gray-300

@@ -14,8 +14,12 @@ function GenericInput(props) {
         className={ infoClass }
         onChange={ onChange }
       >
+        <option value={ 0 }>Selecione um vendedor</option>
         { optionsList
-          .map((o) => <option key={ o.id } value={ o.id }>{ o.name }</option>) }
+          .map((o) => (
+            <option key={ o.id } value={ o.id }>
+              { o.name }
+            </option>)) }
       </select>
     </div>
   );
@@ -28,7 +32,7 @@ GenericInput.propTypes = {
   infoClass: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   optionsList: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     email: PropTypes.string,
     role: PropTypes.string,
