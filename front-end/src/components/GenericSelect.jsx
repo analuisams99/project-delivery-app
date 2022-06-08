@@ -14,7 +14,6 @@ function GenericInput(props) {
         className={ infoClass }
         onChange={ onChange }
       >
-        <option value={ 0 }>Selecione um vendedor</option>
         { optionsList
           .map((o) => (
             <option key={ o.id } value={ o.id }>

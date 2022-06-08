@@ -4,6 +4,12 @@ import React from 'react';
 export default function TableCheckout({ orders, removeProduct }) {
   const dataId = 'customer_checkout__element-order-table-item-number-';
   const dataPrice = 'customer_checkout__element-order-table-unit-price-';
+
+  const convertPrice = (priceWithDot) => {
+    const priceWithComma = priceWithDot.toString().replace('.', ',');
+    return priceWithComma;
+  };
+
   return (
     <div>
       <table>
@@ -19,44 +25,44 @@ export default function TableCheckout({ orders, removeProduct }) {
         </thead>
         <tbody>
           {
-            (orders).map((e) => (
+            (orders).map((e, index) => (
               <tr key={ e.id }>
                 <td
-                  data-testid={ `${dataId}${e.id}` }
+                  data-testid={ `${dataId}${index}` }
                 >
-                  { e.id }
+                  { index + 1 }
 
                 </td>
                 <td
-                  data-testid={ `customer_checkout__element-order-table-name-${e.id}` }
+                  data-testid={ `customer_checkout__element-order-table-name-${index}` }
                 >
                   { e.name }
 
                 </td>
                 <td
                   data-testid={
-                    `customer_checkout__element-order-table-quantity-${e.id}`
+                    `customer_checkout__element-order-table-quantity-${index}`
                   }
                 >
                   { e.quantity }
 
                 </td>
                 <td
-                  data-testid={ `${dataPrice}${e.id}` }
+                  data-testid={ `${dataPrice}${index}` }
                 >
-                  { e.price }
+                  { convertPrice((+e.price).toFixed(2)) }
 
                 </td>
                 <td
                   data-testid={
-                    `customer_checkout__element-order-table-sub-total-${e.id}`
+                    `customer_checkout__element-order-table-sub-total-${index}`
                   }
                 >
-                  { e.quantity * +e.price }
+                  { convertPrice((e.quantity * +e.price).toFixed(2)) }
 
                 </td>
                 <td
-                  data-testid={ `customer_checkout__element-order-table-remove-${e.id}` }
+                  data-testid={ `customer_checkout__element-order-table-remove-${index}` }
                 >
                   <button type="button" id={ e.id } onClick={ removeProduct }>
                     Remover
@@ -73,9 +79,9 @@ export default function TableCheckout({ orders, removeProduct }) {
 
 TableCheckout.propTypes = {
   orders: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
-    price: PropTypes.number,
+    price: PropTypes.string,
     urlImage: PropTypes.string,
     quantity: PropTypes.number,
   })).isRequired,

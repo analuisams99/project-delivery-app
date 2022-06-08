@@ -10,9 +10,9 @@ import 'react-toastify/dist/ReactToastify.css';
 function Checkout() {
   const navigate = useNavigate();
   const [sellers, setSellers] = useState([]);
-  const [seller, setSeller] = useState(0);
+  const [seller, setSeller] = useState(2);
   const [address, setAddress] = useState('');
-  const [houseNum, setHouseNum] = useState(0);
+  const [houseNum, setHouseNum] = useState('');
   const [cartList, setCartList] = useState([]);
   const [userName, setUserName] = useState('');
   const [finalSaleProducts, setFinalSaleProducts] = useState([]);
@@ -73,7 +73,7 @@ function Checkout() {
       sellerId: seller,
       totalPrice,
       deliveryAddress: address,
-      deliveryNumber: houseNum,
+      deliveryNumber: (Number(houseNum)).toString(),
       products: finalSaleProducts
         .map((p) => ({ productId: p.id, quantity: p.quantity })),
     };
@@ -84,6 +84,7 @@ function Checkout() {
       return 'fail';
     }
     setErrorMessage(false);
+    localStorage.setItem('cart', JSON.stringify([]));
     navigate(`/customer/orders/${response.id}`);
   };
 

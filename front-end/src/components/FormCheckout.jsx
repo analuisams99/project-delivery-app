@@ -99,7 +99,11 @@ FormCheckout.propTypes = {
   setSeller: PropTypes.func.isRequired,
   address: PropTypes.string.isRequired,
   setAddress: PropTypes.func.isRequired,
-  houseNum: PropTypes.number.isRequired,
+  // houseNum: PropTypes.oneOfType([
+  //   PropTypes.string,
+  //   PropTypes.number,
+  // ]).isRequired,
+  houseNum: PropTypes.string.isRequired,
   setHouseNum: PropTypes.func.isRequired,
   handleSubmitBtn: PropTypes.func.isRequired,
   sellers: PropTypes.arrayOf(PropTypes.shape({

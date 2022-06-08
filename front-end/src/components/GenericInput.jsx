@@ -28,6 +28,10 @@ GenericInput.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  // value: PropTypes.oneOfType([
+  //   PropTypes.string,
+  //   PropTypes.number,
+  // ]).isRequired,
   value: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   infoClass: PropTypes.string.isRequired,

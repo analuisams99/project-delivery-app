@@ -96,12 +96,13 @@ function Product({ product, addToCart }) {
 }
 
 Product.propTypes = {
-  product: PropTypes.objectOf(PropTypes.shape({
-    id: PropTypes.string,
+  product: PropTypes.shape({
+    id: PropTypes.number,
     name: PropTypes.string,
-    price: PropTypes.number,
+    price: PropTypes.string,
     urlImage: PropTypes.string,
-  })).isRequired,
+    quantity: PropTypes.number,
+  }).isRequired,
   addToCart: PropTypes.func.isRequired,
 };
 
