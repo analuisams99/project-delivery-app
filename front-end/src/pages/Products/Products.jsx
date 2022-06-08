@@ -21,7 +21,7 @@ function Products() {
     const newProducts = allProducts.map((e) => ({ ...e, quantity: 0 }));
     setProducts(newProducts);
     setIsLoading(false);
-    return allProducts;
+    return newProducts;
   };
 
   const sendToCheckout = () => {
@@ -56,8 +56,19 @@ function Products() {
     return priceWithComma;
   };
 
+  const setCart = () => {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    if (!cart) {
+      return localStorage.setItem('cart', JSON.stringify([]));
+    }
+    setTotalPrice(totalPriceSum(cart).toFixed(2));
+
+    return setProducts(cart);
+  };
+
   useEffect(() => {
     getAllProducts();
+    setCart();
   }, []);
 
   return (

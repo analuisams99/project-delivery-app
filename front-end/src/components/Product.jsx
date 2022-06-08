@@ -2,23 +2,23 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 function Product({ product, addToCart }) {
-  const [quantity, setQuantity] = useState(0);
-  const { id, name, urlImage, price } = product;
+  const { id, name, urlImage, price, quantity } = product;
+  const [quantities, setQuantities] = useState(quantity);
 
   const handleSumBtn = () => {
-    setQuantity(quantity + 1);
-    addToCart(id, quantity + 1);
+    setQuantities(quantities + 1);
+    addToCart(id, quantities + 1);
   };
 
   const handleDeductBtn = () => {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
-      addToCart(id, quantity - 1);
+    if (quantities > 0) {
+      setQuantities(quantities - 1);
+      addToCart(id, quantities - 1);
     }
   };
 
   const handleChangeQnt = ({ target }) => {
-    setQuantity(+target.value);
+    setQuantities(+target.value);
     addToCart(id, +target.value);
   };
 
@@ -72,11 +72,11 @@ function Product({ product, addToCart }) {
           </button>
           <input
             type="number"
-            value={ quantity }
+            value={ quantities }
             onChange={ handleChangeQnt }
             min="0"
             className="px-1 w-10 bg-slate-200"
-            data-testid={ `customer_products__input-card-quantity-${id}` }
+            data-testid={ `customer_products__input-card-quantities-${id}` }
           />
           <button
             className="w-6 px-2 border border-gray-300
