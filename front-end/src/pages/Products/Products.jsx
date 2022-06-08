@@ -18,10 +18,15 @@ function Products() {
       localStorage.clear();
       navigate('/login');
     }
-    const newProducts = allProducts.map((e) => ({ ...e, quantity: 0 }));
-    setProducts(newProducts);
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    if (!cart || cart.length === 0) {
+      const newProducts = allProducts.map((e) => ({ ...e, quantity: 0 }));
+      setProducts(newProducts);
+      setIsLoading(false);
+      return newProducts;
+    }
     setIsLoading(false);
-    return newProducts;
+    return products;
   };
 
   const sendToCheckout = () => {
@@ -40,6 +45,8 @@ function Products() {
     newArray[teste].quantity = value;
     setProducts([...newArray]);
     setTotalPrice(totalPriceSum(newArray).toFixed(2));
+    localStorage.setItem('cart', JSON.stringify(products));
+    localStorage.setItem('totalPrice', totalPrice);
   };
 
   const buttons = [
@@ -67,8 +74,8 @@ function Products() {
   };
 
   useEffect(() => {
-    getAllProducts();
     setCart();
+    getAllProducts();
   }, []);
 
   return (
