@@ -8,7 +8,6 @@ import {
   CustomerOrders,
   CustomerOrderDetails,
   SellerOrders,
-  SellerOrderDetails,
   AdminManage,
   NotFound,
 } from './pages';
@@ -24,7 +23,7 @@ function App() {
       <Route exact path="/customer/orders" element={ <CustomerOrders /> } />
       <Route exact path="/customer/orders/:id" element={ <CustomerOrderDetails /> } />
       <Route exact path="/seller/orders" element={ <SellerOrders /> } />
-      <Route exact path="/seller/orders/:id" element={ <SellerOrderDetails /> } />
+      <Route exact path="/seller/orders/:id" element={ <CustomerOrderDetails /> } />
       <Route exact path="/admin/manage" element={ <AdminManage /> } />
       <Route exact path="/admin/manage" element={ <AdminManage /> } />
       <Route path="/*" element={ <NotFound /> } />

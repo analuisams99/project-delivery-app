@@ -10,19 +10,17 @@ function CustomerOrders() {
 
   const productsButton = {
     name: 'Produtos',
-    testId: 'customer_products__element-navbar-link-products',
+    dataId: 'customer_products__element-navbar-link-products',
     role: 'customer/products',
   };
   const ordersButton = {
     name: 'Meus Pedidos',
-    testId: 'customer_products__element-navbar-link-orders',
+    dataId: 'customer_products__element-navbar-link-orders',
     role: 'customer/orders',
   };
 
   const getAllOrders = async () => {
-    console.log('1', user.token, userId.id);
     const allOrders = await getCustomerOrders(user.token, userId.id);
-    console.log('2', allOrders);
     setOrders(allOrders);
   };
 

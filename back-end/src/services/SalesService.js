@@ -21,7 +21,7 @@ const statusChangePrepare = async (id) => {
 };
 
 const statusChangeToDeliver = async (id) => {
-  await Sale.update({ status: 'Em trânsito' }, { where: { id } });
+  await Sale.update({ status: 'Em Trânsito' }, { where: { id } });
 };
 
 const listAllSales = async () => {
