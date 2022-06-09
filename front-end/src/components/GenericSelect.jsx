@@ -2,41 +2,40 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function GenericInput(props) {
-  const { name, type, value, label, id, infoClass, placeholder, onChange } = props;
+  const { name, value, id, infoClass, onChange, optionsList } = props;
   return (
     <div>
-      <label htmlFor={ id } className="sr-only">
-        {label}
-      </label>
-      <input
+      <select
         id={ id }
         data-testid={ id }
         name={ name }
-        type={ type }
         value={ value }
-        autoComplete={ name }
         required
         className={ infoClass }
-        placeholder={ placeholder }
         onChange={ onChange }
-      />
+      >
+        { optionsList
+          .map((o) => (
+            <option key={ o.id } value={ o.id }>
+              { o.name }
+            </option>)) }
+      </select>
     </div>
   );
 }
 
 GenericInput.propTypes = {
   name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  // value: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number,
-  // ]).isRequired,
   value: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   infoClass: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  optionsList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    email: PropTypes.string,
+    role: PropTypes.string,
+  })).isRequired,
 };
 
 export default GenericInput;
