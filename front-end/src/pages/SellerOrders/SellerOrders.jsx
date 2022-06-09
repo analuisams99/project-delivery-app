@@ -10,7 +10,7 @@ function SellerOrders() {
 
   const ordersButton = {
     name: 'Pedidos',
-    testId: 'customer_products__element-navbar-link-orders',
+    dataId: 'customer_products__element-navbar-link-orders',
     role: 'seller/orders',
   };
 

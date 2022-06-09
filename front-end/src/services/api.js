@@ -86,18 +86,20 @@ const postNewSales = async (token, salesData) => {
 
 const patchDelivered = async (token, id) => {
   try {
-    const { data } = await api.patch(`/sales/delivered/${id}`, {
+    const { data } = await api.patch(`/sales/delivered/${id}`, {}, {
       headers: { authorization: token },
     });
+    console.log('3');
     return data;
   } catch (error) {
+    console.log('3.2');
     return error.response;
   }
 };
 
 const patchPrepare = async (token, id) => {
   try {
-    const { data } = await api.patch(`/sales/prepare/${id}`, {
+    const { data } = await api.patch(`/sales/prepare/${id}`, {}, {
       headers: { authorization: token },
     });
     return data;
@@ -108,11 +110,13 @@ const patchPrepare = async (token, id) => {
 
 const patchToDeliver = async (token, id) => {
   try {
-    const { data } = await api.patch(`/sales/todeliver/${id}`, {
+    const { data } = await api.patch(`/sales/todeliver/${id}`, {}, {
       headers: { authorization: token },
     });
+    console.log('3');
     return data;
   } catch (error) {
+    console.log('3.2');
     return error.response;
   }
 };
