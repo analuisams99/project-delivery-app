@@ -6,6 +6,7 @@ const Validation = require('../middlewares/validations');
 
 const router = express.Router();
 
+router.post('/login/verify', authorizationGeneral, UserController.verifyToken);
 router.post('/login', Validation, loginExists, UserController.login);
 router.post('/users', Validation, userUnexists, UserController.createUser);
 router.post('/users/admin', 

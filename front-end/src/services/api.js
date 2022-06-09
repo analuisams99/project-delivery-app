@@ -15,6 +15,17 @@ const postLogin = async (loginData) => {
   }
 };
 
+const postVerifyLogin = async (token) => {
+  try {
+    const { data } = await api.post('/login/verify', {}, {
+      headers: { authorization: token },
+    });
+    return data;
+  } catch (error) {
+    return error.response;
+  }
+};
+
 const postRegister = async (registerData) => {
   try {
     const { data } = await api.post('/users', registerData, {
@@ -39,11 +50,14 @@ const getProducts = async (token) => {
 
 const getCustomerOrders = async (token, id) => {
   try {
-    const { data } = await api.get(`/sales/costumer/${id}`, {
+    console.log('3');
+    const { data } = await api.get(`/sales/customer/${id}`, {
       headers: { authorization: token },
     });
+    console.log('4', data);
     return data;
   } catch (error) {
+    console.log('4', error);
     return error.response;
   }
 };
@@ -173,4 +187,5 @@ export {
   getSellers,
   deleteUser,
   postUserAdmin,
+  postVerifyLogin,
 };

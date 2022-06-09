@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import GenericInput from '../../components/GenericInput';
 import GenericButton from '../../components/GenericButton';
-import { postLogin } from '../../services/api';
+import { postLogin, postVerifyLogin } from '../../services/api';
 
 function Login() {
   const navigate = useNavigate();
@@ -61,6 +61,34 @@ function Login() {
   const handleRegisterClick = () => {
     navigate('/register');
   };
+
+  const verifyToken = async () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user || !Object.keys(user).includes('token')) {
+      return null;
+    }
+    const response = await postVerifyLogin(user.token);
+    if (response.status) {
+      return null;
+    }
+    switch (user.role) {
+    case 'administrator':
+      navigate('/admin/manage');
+      break;
+    case 'seller':
+      navigate('/seller/orders');
+      break;
+    case 'customer':
+      navigate('/customer/products');
+      break;
+    default:
+      navigate('/customer/notfound');
+    }
+  };
+
+  useEffect(() => {
+    verifyToken();
+  }, []);
 
   return (
     <div

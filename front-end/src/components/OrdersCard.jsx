@@ -13,6 +13,11 @@ function OrdersCard({ orders, role }) {
     return dataBrasileira;
   };
 
+  const convertPrice = (priceWithDot) => {
+    const priceWithComma = priceWithDot.toString().replace('.', ',');
+    return priceWithComma;
+  };
+
   return (
     <div>
       {orders.map(
@@ -20,7 +25,7 @@ function OrdersCard({ orders, role }) {
           <button key={ id } type="button" onClick={ () => handleClick(role, id) }>
             <p>Pedido</p>
             <p data-testid={ `${role}_orders__element-order-id-${id}` }>
-              {deliveryNumber}
+              {id}
             </p>
             <p data-testid={ `${role}_orders__element-delivery-status-${id}` }>
               {status}
@@ -29,7 +34,7 @@ function OrdersCard({ orders, role }) {
               {handleDate(saleDate)}
             </p>
             <p data-testid={ `${role}_orders__element-card-price-${id}` }>
-              { totalPrice }
+              { convertPrice(totalPrice) }
             </p>
             {
               role === 'seller'
@@ -37,7 +42,7 @@ function OrdersCard({ orders, role }) {
                   <p
                     data-testid={ `${role}_orders__element-card-address-${id}` }
                   >
-                    { deliveryAddress }
+                    { `${deliveryAddress}, ${deliveryNumber}` }
                   </p>
                 )
                 : null
