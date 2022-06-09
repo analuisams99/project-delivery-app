@@ -20,9 +20,7 @@ function CustomerOrders() {
   };
 
   const getAllOrders = async () => {
-    console.log('1', user.token, userId.id);
     const allOrders = await getCustomerOrders(user.token, userId.id);
-    console.log('2', allOrders);
     setOrders(allOrders);
   };
 

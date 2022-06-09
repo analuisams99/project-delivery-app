@@ -18,7 +18,6 @@ function Products() {
       navigate('/login');
     }
     const allProducts = await getProducts(user.token);
-    console.log(allProducts);
     if (!allProducts[0]) {
       localStorage.clear();
       navigate('/login');
