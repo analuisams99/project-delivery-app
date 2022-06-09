@@ -78,7 +78,6 @@ function Checkout() {
         .map((p) => ({ productId: p.id, quantity: p.quantity })),
     };
     const response = await postNewSales(user.token, salesData);
-    console.log(response);
     if (response.error) {
       setErrorMessage(true);
       return 'fail';

@@ -10,7 +10,7 @@ router.post('/login/verify', authorizationGeneral, UserController.verifyToken);
 router.post('/login', Validation, loginExists, UserController.login);
 router.post('/users', Validation, userUnexists, UserController.createUser);
 router.post('/users/admin', 
-  authorizationGeneral, checkAdmin, Validation, UserController.createUserAdmin);
+  authorizationGeneral, checkAdmin, Validation, userUnexists, UserController.createUserAdmin);
 
 router.get('/users', authorizationGeneral, checkAdmin, UserController.getUsers);
 router.get('/users/sellers', authorizationGeneral, UserController.getSellers);
