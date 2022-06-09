@@ -15,6 +15,17 @@ const postLogin = async (loginData) => {
   }
 };
 
+const postVerifyLogin = async (token) => {
+  try {
+    const { data } = await api.post('/login/verify', {}, {
+      headers: { authorization: token },
+    });
+    return data;
+  } catch (error) {
+    return error.response;
+  }
+};
+
 const postRegister = async (registerData) => {
   try {
     const { data } = await api.post('/users', registerData, {
@@ -173,4 +184,5 @@ export {
   getSellers,
   deleteUser,
   postUserAdmin,
+  postVerifyLogin,
 };
