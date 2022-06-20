@@ -48,6 +48,7 @@ function Register() {
       return 'fail';
     }
     localStorage.setItem('user', JSON.stringify(response));
+    localStorage.setItem('userId', JSON.stringify(response.id));
     navigate('/customer/products');
   };
 
