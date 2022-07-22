@@ -1,5 +1,7 @@
 # Projeto Trybe Recipes
 
+-- Projeto incompleto, precisa de alguns ajustes para funcionar corretamente no navegador.
+
 Projeto de conclusão do bloco de Back-end da [Trybe](https://www.betrybe.com). Trabalho realizado em grupo de 5 estudantes.
 O grupo foi responsável por criar e integrar tanto o back-end quanto o front-end, criando uma plataforma de delivery de cerveja.
 
@@ -68,9 +70,14 @@ Inicie o servidor
 
 ```bash
   cd back-end
-  npm start
+  npm install
+  npm db:reset
+  npm run dev
+  
   cd ..
+  
   cd front-end
+  npm install
   npm start
 ```
 
