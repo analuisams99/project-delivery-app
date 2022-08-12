@@ -56,32 +56,45 @@ Clone o projeto
   git clone git@github.com:analuisams99/project-delivery-app.git
 ```
 
-Entre no diretório do projeto
+Entre no diretório do projeto e abra ele no seu VSCode
 
 ```bash
   cd project-delivery-app
+  code .
 ```
 
-Instale as dependências
-
+Instale as dependências na raiz do projeto
 ```bash
-  npm install
+  npm run dev:prestart
+```
+Dentro da pasta de backend, crie um .env com suas informações, o app não irá funcionar sem ele. (Exemplo): 
+```bash
+NODE_ENV=development
+API_PORT=3001
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_USER=root
+MYSQL_PASSWORD=senhaDoDB
+MYSQL_DB_NAME=delivery-app
+EVAL_ALWAYS_RESTORE_DEV_DB=true
 ```
 
 Inicie o servidor
 
 ```bash
   cd back-end
-  npm install
   npm db:reset
   npm run dev
   
   cd ..
   
   cd front-end
-  npm install
   npm start
 ```
+
+Pronto! Agora você ja pode acessar o projeto pelo seu navegador
+
+
 
 ## Demonstração
 
