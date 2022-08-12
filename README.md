@@ -1,6 +1,7 @@
 # Projeto Delivery App
 
 -- Aguarde um momento... o projeto está em manutenção, estou fazendo alguns ajustes para funcionar corretamente no navegador, mas logo logo estará 100% :D
+
 -- Enquanto isso, fique a vontade para ver o código feito pelo grupo.
 
 Projeto de conclusão do bloco de Back-end da [Trybe](https://www.betrybe.com). Trabalho realizado em grupo de 5 estudantes.
